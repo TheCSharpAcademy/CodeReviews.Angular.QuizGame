@@ -1,0 +1,43 @@
+<h2 mat-dialog-title [ngStyle]="{ color: '#673ab7' }">Quiz Results</h2>
+<mat-dialog-content class="mat-typography">
+  <div
+    *ngIf="quizData"
+    class="d-flex align-items-center justify-content-evenly"
+  >
+    <span>name: {{ quizData.game.playerName | titlecase }}</span>
+    <span>Score: {{ quizData.game.score }}%</span>
+  </div>
+
+  <mat-list role="list" class="d-flex flex-column gap-4 flex-wrap">
+    <mat-list-item
+      class="h-25"
+      role="listitem"
+      *ngFor="let q of quizData.answers; let i = index"
+    >
+      <!-- <p *ngIf="q.id.toString().length > 1" class="w-100 text-start">
+        {{ q.id.toString()[1] == "0" ? 10 : q.id.toString()[1] }} -
+        {{ q.text }}
+      </p> -->
+      <p class="w-100 text-start">
+        {{ i + 1 }} -
+        {{ q.text }}
+      </p>
+
+      <p class="text-success ms-4">Correct Answer: {{ q.answer }}</p>
+
+      <p
+        *ngIf="q.userAnswer"
+        [ngClass]="{
+          'text-danger': q.userAnswer != q.answer,
+          'text-success': q.userAnswer == q.answer,
+          'ms-4': true,
+        }"
+      >
+        Your Answer: {{ q.userAnswer }}
+      </p>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onDialogClose()">done</button>
+</mat-dialog-actions>

@@ -1,0 +1,204 @@
+{
+  "quize": [
+    {
+      "question": "What is the largest mammal on Earth?",
+      "options": {
+        "A": "Elephant",
+        "B": "Blue Whale",
+        "C": "Giraffe",
+        "D": "Gorilla"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which animal is known as the 'King of the Jungle'?",
+      "options": {
+        "A": "Tiger",
+        "B": "Lion",
+        "C": "Cheetah",
+        "D": "Leopard"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What do you call a baby kangaroo?",
+      "options": {
+        "A": "Cub",
+        "B": "Joey",
+        "C": "Pup",
+        "D": "Fawn"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following animals can change its color?",
+      "options": {
+        "A": "Chameleon",
+        "B": "Elephant",
+        "C": "Kangaroo",
+        "D": "Giraffe"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the fastest land animal?",
+      "options": {
+        "A": "Cheetah",
+        "B": "Lion",
+        "C": "Leopard",
+        "D": "Gazelle"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which animal is a symbol of good luck in many cultures?",
+      "options": {
+        "A": "Elephant",
+        "B": "Monkey",
+        "C": "Dolphin",
+        "D": "Panda"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the only flying mammal?",
+      "options": {
+        "A": "Bat",
+        "B": "Bird",
+        "C": "Butterfly",
+        "D": "Penguin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which animal can regrow its tail?",
+      "options": {
+        "A": "Lizard",
+        "B": "Snake",
+        "C": "Frog",
+        "D": "Salamander"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the largest bird in the world?",
+      "options": {
+        "A": "Eagle",
+        "B": "Ostrich",
+        "C": "Penguin",
+        "D": "Albatross"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which animal is known as the 'Ship of the Desert'?",
+      "options": {
+        "A": "Camel",
+        "B": "Horse",
+        "C": "Elephant",
+        "D": "Llama"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a group of lions called?",
+      "options": {
+        "A": "Herd",
+        "B": "Pride",
+        "C": "Flock",
+        "D": "Pack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which animal has the longest lifespan?",
+      "options": {
+        "A": "Tortoise",
+        "B": "Elephant",
+        "C": "Whale",
+        "D": "Parrot"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What do you call a group of dolphins?",
+      "options": {
+        "A": "School",
+        "B": "Pod",
+        "C": "Herd",
+        "D": "Pack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which animal is known for its humps?",
+      "options": {
+        "A": "Giraffe",
+        "B": "Kangaroo",
+        "C": "Camel",
+        "D": "Hippopotamus"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary diet of giant pandas?",
+      "options": {
+        "A": "Bamboo",
+        "B": "Fish",
+        "C": "Meat",
+        "D": "Fruits"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which animal is the largest reptile in the world?",
+      "options": {
+        "A": "Snake",
+        "B": "Crocodile",
+        "C": "Lizard",
+        "D": "Turtle"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a baby goat called?",
+      "options": {
+        "A": "Calf",
+        "B": "Kid",
+        "C": "Piglet",
+        "D": "Fawn"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which animal is known for its black and white stripes?",
+      "options": {
+        "A": "Zebra",
+        "B": "Tiger",
+        "C": "Giraffe",
+        "D": "Leopard"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the largest fish in the ocean?",
+      "options": {
+        "A": "Dolphin",
+        "B": "Shark",
+        "C": "Whale Shark",
+        "D": "Tuna"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which animal is known as the 'Gentle Giant'?",
+      "options": {
+        "A": "Elephant",
+        "B": "Rhino",
+        "C": "Hippopotamus",
+        "D": "Giraffe"
+      },
+      "answer": "A"
+    }
+  ]
+}
