@@ -32,15 +32,11 @@ export class QuizComponent {
   getQuiz(quizId: number) {
     this.quizService.getQuiz(quizId).subscribe((response) => {
       this.quiz = response;
-      console.log(this.quiz);
-    });
-
-    if (this.quiz) {
       this.quizService.getQuestions(quizId).subscribe((response) => {
         this.quiz.questions = response;
-        if (this.quiz.questions) this.linkListToPaginator();
+        this.linkListToPaginator();
       });
-    }
+    });
   }
 
   onAnswer(question: any, answer: any) {
