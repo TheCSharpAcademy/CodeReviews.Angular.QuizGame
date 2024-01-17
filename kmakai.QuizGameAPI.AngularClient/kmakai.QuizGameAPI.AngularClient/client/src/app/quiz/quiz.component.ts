@@ -86,13 +86,17 @@ export class QuizComponent {
         startWith({}),
         switchMap(() => {
           console.log(this.quiz.questions);
+
           return of(this.quiz.questions);
         })
       )
       .subscribe((res) => {
-        const from = this.paginator.pageIndex * this.paginator.pageSize;
-        const to = from + this.paginator.pageSize;
-        this.dataSource = res.slice(from, to);
+        if (res) {
+          const from = this.paginator.pageIndex * this.paginator.pageSize;
+          const to = from + this.paginator.pageSize;
+          console.log(res);
+          this.dataSource = res.slice(from, to);
+        }
       });
   }
 }

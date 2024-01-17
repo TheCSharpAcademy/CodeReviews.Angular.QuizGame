@@ -17,7 +17,9 @@ export class QuizappService {
   }
 
   getQuestions(quizId: number) {
-    return this.http.get(this.apiUrl + 'questions/' + quizId);
+    let questions = this.http.get(this.apiUrl + 'questions/' + quizId);
+    console.log(questions);
+    return questions;
   }
 
   getGames() {
