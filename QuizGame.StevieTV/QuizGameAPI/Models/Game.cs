@@ -2,7 +2,7 @@
 
 public class Game
 {
-    public int GameId { get; set; }
+    public int Id { get; set; }
 
     public string PlayerName { get; set; } = "";
 
@@ -10,6 +10,6 @@ public class Game
     public int PotentialTotal { get; set; }
 
     public int QuizId { get; set; }    
-    public Quiz CurrentQuiz { get; set; } = null!;
+    public Quiz Quiz { get; set; } = null!;
 
 }

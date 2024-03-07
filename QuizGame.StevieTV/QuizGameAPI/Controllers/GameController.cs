@@ -42,7 +42,7 @@ namespace QuizGameAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGame(int id, Game game)
         {
-            if (id != game.GameId)
+            if (id != game.Id)
             {
                 return BadRequest();
             }
@@ -76,7 +76,7 @@ namespace QuizGameAPI.Controllers
             _context.Games.Add(game);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGame", new { id = game.GameId }, game);
+            return CreatedAtAction("GetGame", new { id = game.Id }, game);
         }
 
         // DELETE: api/Game/5
@@ -97,7 +97,12 @@ namespace QuizGameAPI.Controllers
 
         private bool GameExists(int id)
         {
-            return _context.Games.Any(e => e.GameId == id);
+            return _context.Games.Any(e => e.Id == id);
+        }
+        
+        private bool QuizExists(int id)
+        {
+            return _context.Quizzes.Any(e => e.Id == id);
         }
     }
 }

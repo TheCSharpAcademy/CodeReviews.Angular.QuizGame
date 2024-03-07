@@ -16,7 +16,7 @@ namespace QuizGameAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    QuizName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,7 +27,7 @@ namespace QuizGameAPI.Migrations
                 name: "Games",
                 columns: table => new
                 {
-                    GameId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlayerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Score = table.Column<int>(type: "int", nullable: false),
@@ -36,7 +36,7 @@ namespace QuizGameAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Games", x => x.GameId);
+                    table.PrimaryKey("PK_Games", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Games_Quizzes_QuizId",
                         column: x => x.QuizId,
@@ -49,7 +49,7 @@ namespace QuizGameAPI.Migrations
                 name: "Questions",
                 columns: table => new
                 {
-                    QuestionId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionPrompt = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Answer1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -60,7 +60,7 @@ namespace QuizGameAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Questions", x => x.QuestionId);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Questions_Quizzes_QuizId",
                         column: x => x.QuizId,

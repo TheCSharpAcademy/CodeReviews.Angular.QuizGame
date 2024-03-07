@@ -20,7 +20,17 @@ namespace QuizGameAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Quiz>>> GetQuizzes()
         {
+           // return await _context.Quizzes.Include(q => q.Questions).ToListAsync();
             return await _context.Quizzes.ToListAsync();
+        }
+        
+        // GET: api/QuizQuestions
+        [HttpGet]
+        [Route("QuizQuestions")]
+        public async Task<ActionResult<IEnumerable<Quiz>>> GetQuizzesWithQuestions()
+        {
+           return await _context.Quizzes.Include(q => q.Questions).ToListAsync();
+           // return await _context.Quizzes.ToListAsync();
         }
 
         // GET: api/Quiz/5

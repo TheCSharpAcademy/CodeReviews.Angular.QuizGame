@@ -22,6 +22,20 @@ namespace QuizGameAPI.Controllers
         {
             return await _context.Questions.ToListAsync();
         }
+        
+        // GET: api/Quiz/{id}/Questions
+        [HttpGet]
+        [Route("/api/Quiz/{id}/Questions")]
+        public async Task<ActionResult<IEnumerable<Question>>> GetQuestionsByQuiz(int id)
+        {
+            var questions = await _context.Questions.Include(q => q.Quiz).Where(question => question.QuizId == id).ToListAsync();
+
+            foreach (var q in questions)
+            {
+                Console.WriteLine($"Question id {q.Id} has quiz id {q.QuizId} with name {q.Quiz.Name}");
+            }
+            return await _context.Questions.Where(question => question.QuizId == id).ToListAsync();
+        }
 
         // GET: api/Question/5
         [HttpGet("{id}")]
@@ -42,7 +56,7 @@ namespace QuizGameAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuestion(int id, Question question)
         {
-            if (id != question.QuestionId)
+            if (id != question.Id)
             {
                 return BadRequest();
             }
@@ -71,12 +85,26 @@ namespace QuizGameAPI.Controllers
         // POST: api/Question
         // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Question>> PostQuestion(Question question)
+        public async Task<ActionResult<Question>> PostQuestion(QuestionDTO questionDto)
         {
+            if (!QuizExists(questionDto.QuizId))
+            {
+                return BadRequest("The Quiz you are trying to add a question to does not exist");
+            }
+            var question = new Question
+            {
+                QuestionPrompt = questionDto.QuestionPrompt,
+                Answer1 = questionDto.Answer1,
+                Answer2 = questionDto.Answer2,
+                Answer3 = questionDto.Answer3,
+                CorrectAnswer = questionDto.CorrectAnswer,
+                QuizId = questionDto.QuizId
+            };
+            
             _context.Questions.Add(question);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetQuestion", new { id = question.QuestionId }, question);
+            return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
         }
 
         // DELETE: api/Question/5
@@ -97,7 +125,12 @@ namespace QuizGameAPI.Controllers
 
         private bool QuestionExists(int id)
         {
-            return _context.Questions.Any(e => e.QuestionId == id);
+            return _context.Questions.Any(e => e.Id == id);
+        }
+        
+        private bool QuizExists(int id)
+        {
+            return _context.Quizzes.Any(e => e.Id == id);
         }
     }
 }

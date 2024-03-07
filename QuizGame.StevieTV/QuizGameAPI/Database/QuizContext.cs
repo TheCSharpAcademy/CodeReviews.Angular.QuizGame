@@ -11,18 +11,17 @@ public class QuizContext(DbContextOptions<QuizContext> options) : DbContext(opti
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Quiz>()
-            .HasMany(q => q.Questions)
-            .WithOne(q => q.CurrentQuiz)
+        modelBuilder.Entity<Question>()
+            .HasOne(q => q.Quiz)
+            .WithMany(q => q.Questions)
             .HasForeignKey(q => q.QuizId)
-            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Quiz>()
-            .HasMany(q => q.Games)
-            .WithOne(q => q.CurrentQuiz)
-            .HasForeignKey(q => q.QuizId)
-            .IsRequired()
+        modelBuilder.Entity<Game>()
+            .HasOne(g => g.Quiz)
+            .WithMany(g => g.Games)
+            .HasForeignKey(g => g.QuizId)
             .OnDelete(DeleteBehavior.Cascade);
+        
     }
 }

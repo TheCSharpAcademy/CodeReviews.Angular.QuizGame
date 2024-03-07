@@ -11,7 +11,7 @@ using QuizGameAPI.Database;
 namespace QuizGameAPI.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20240305184206_Initial")]
+    [Migration("20240307205153_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,11 +26,11 @@ namespace QuizGameAPI.Migrations
 
             modelBuilder.Entity("QuizGameAPI.Models.Game", b =>
                 {
-                    b.Property<int>("GameId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("PlayerName")
                         .IsRequired()
@@ -45,7 +45,7 @@ namespace QuizGameAPI.Migrations
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.HasKey("GameId");
+                    b.HasKey("Id");
 
                     b.HasIndex("QuizId");
 
@@ -54,11 +54,11 @@ namespace QuizGameAPI.Migrations
 
             modelBuilder.Entity("QuizGameAPI.Models.Question", b =>
                 {
-                    b.Property<int>("QuestionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Answer1")
                         .IsRequired()
@@ -82,7 +82,7 @@ namespace QuizGameAPI.Migrations
                     b.Property<int>("QuizId")
                         .HasColumnType("int");
 
-                    b.HasKey("QuestionId");
+                    b.HasKey("Id");
 
                     b.HasIndex("QuizId");
 
@@ -97,7 +97,7 @@ namespace QuizGameAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("QuizName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -108,24 +108,24 @@ namespace QuizGameAPI.Migrations
 
             modelBuilder.Entity("QuizGameAPI.Models.Game", b =>
                 {
-                    b.HasOne("QuizGameAPI.Models.Quiz", "CurrentQuiz")
+                    b.HasOne("QuizGameAPI.Models.Quiz", "Quiz")
                         .WithMany("Games")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CurrentQuiz");
+                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("QuizGameAPI.Models.Question", b =>
                 {
-                    b.HasOne("QuizGameAPI.Models.Quiz", "CurrentQuiz")
+                    b.HasOne("QuizGameAPI.Models.Quiz", "Quiz")
                         .WithMany("Questions")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CurrentQuiz");
+                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("QuizGameAPI.Models.Quiz", b =>
