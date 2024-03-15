@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+    <span *ngIf="newQuestion.id">Edit Question</span>
+    <span *ngIf="!newQuestion.id">Add Question</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form #questionForm="ngForm">
+      <input hidden name="QuizId" [(ngModel)]="newQuestion.QuizId">
+      <mat-form-field class="fullWidth">
+        <mat-label>Question</mat-label>
+        <input matInput name="QuestionPrompt" [(ngModel)]="newQuestion.questionPrompt" required/>
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <mat-label>Answer 1</mat-label>
+        <input matInput name="Answer1" [(ngModel)]="newQuestion.answer1" required/>
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <mat-label>Answer 2</mat-label>
+        <input matInput name="Answer2" [(ngModel)]="newQuestion.answer2" required/>
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <mat-label>Answer 3</mat-label>
+        <input matInput name="Answer3" [(ngModel)]="newQuestion.answer3" required/>
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <mat-label>Correct Answer</mat-label>
+        <input matInput type="number" name="CorrectAnswer" [(ngModel)]="newQuestion.correctAnswer" min="1" max="3"
+               required/>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="!newQuestion.id" mat-fab extended color="primary" (click)="addQuestion()" [disabled]="questionForm.form.invalid">
+      <mat-icon fontIcon="save"></mat-icon>
+      Save
+    </button>
+    <button *ngIf="newQuestion.id" mat-fab extended color="primary" (click)="editQuestion()" [disabled]="questionForm.form.invalid">
+      <mat-icon fontIcon="save"></mat-icon>
+      Edit
+    </button>
+    <button mat-fab extended color="primary" (click)="newQuestion = emptyQuestion">
+      <mat-icon fontIcon="add"></mat-icon>
+      New
+    </button>
+    <button *ngIf="newQuestion.id" mat-fab extended color="warn" (click)="deleteQuestion()">
+      <mat-icon fontIcon="delete"></mat-icon>
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

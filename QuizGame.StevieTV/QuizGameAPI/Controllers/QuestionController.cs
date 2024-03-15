@@ -18,9 +18,10 @@ namespace QuizGameAPI.Controllers
 
         // GET: api/Question
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
+        public async Task<ActionResult<IEnumerable<QuestionDTO>>> GetQuestions()
         {
-            return await _context.Questions.ToListAsync();
+            var questions = await _context.Questions.ToListAsync();
+            return questions.Select(x => x.ToQuestionDTO()).ToList();
         }
         
         // GET: api/Quiz/{id}/Questions
@@ -54,14 +55,22 @@ namespace QuizGameAPI.Controllers
         // PUT: api/Question/5
         // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuestion(int id, Question question)
+        public async Task<IActionResult> PutQuestion(int id, QuestionDTO questionDto)
         {
-            if (id != question.Id)
+            if (id != questionDto.Id)
             {
                 return BadRequest();
             }
 
+            var question = await _context.Questions.FindAsync(questionDto.Id);
+
             _context.Entry(question).State = EntityState.Modified;
+
+            question.QuestionPrompt = questionDto.QuestionPrompt;
+            question.Answer1 = questionDto.Answer1;
+            question.Answer2 = questionDto.Answer2;
+            question.Answer3 = questionDto.Answer3;
+            question.CorrectAnswer = questionDto.CorrectAnswer;
 
             try
             {
