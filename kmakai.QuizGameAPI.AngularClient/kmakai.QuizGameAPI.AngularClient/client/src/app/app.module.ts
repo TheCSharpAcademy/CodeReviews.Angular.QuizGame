@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IndexComponent } from './index/index.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuizDialogComponent } from './quiz-dialog/quiz-dialog.component';
+import { QuizCreatorComponent } from './quiz-creator/quiz-creator.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { QuizDialogComponent } from './quiz-dialog/quiz-dialog.component';
     IndexComponent,
     QuizComponent,
     QuizDialogComponent,
+    QuizCreatorComponent,
   ],
   imports: [
     BrowserModule,
