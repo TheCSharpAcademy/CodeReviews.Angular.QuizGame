@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuizappService } from '../services/quizapp.service';
 import { FormArray } from '@angular/forms';
 
 @Component({
@@ -95,7 +96,7 @@ export class QuizCreatorComponent {
       Option4: 8,
     },
   ];
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private quizService: QuizappService) {
     this.quizForm = this.fb.group({
       id: 0,
       name: ['', Validators.required],
@@ -114,7 +115,28 @@ export class QuizCreatorComponent {
   }
 
   onSubmit() {
-    console.log(this.quizForm.value);
+    const quizObj = {
+      Id: 0,
+      Name: this.quizForm.value.name,
+      Description: this.quizForm.value.description,
+      Questions: null,
+      Games: null,
+    };
+
+    this.quizService.postQuiz(quizObj).subscribe((response) => {
+      this.quiz = response;
+      console.log(this.quiz);
+      this.questions = this.questions.map((q) => {
+        return {
+          ...q,
+          QuizId: this.quiz.id,
+        };
+      });
+
+      this.quizService.postQuestions(this.questions).subscribe((response) => {
+        console.log(response);
+      });
+    });
   }
 
   addQuestion(form: HTMLElement) {

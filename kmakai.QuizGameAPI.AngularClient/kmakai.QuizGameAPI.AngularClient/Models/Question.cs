@@ -13,9 +13,7 @@ public class Question
     public string Option4 { get; set; } = string.Empty;
 
     public int QuizId { get; set; }
-
-    [ForeignKey(nameof(QuizId))]
-    public Quiz? Quiz { get; set; } = null!;
+    public Quiz? Quiz { get; set; }
 
 }
 

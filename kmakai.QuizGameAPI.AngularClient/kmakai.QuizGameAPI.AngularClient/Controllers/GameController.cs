@@ -17,55 +17,6 @@ public class GameController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("quizzes")]
-    public async Task<ActionResult<Quiz>> GetQuizzes()
-    {
-        var quizzes = await _context.Quizzes.ToListAsync();
-        
-       if (quizzes == null)
-        {
-            return NotFound();
-        }
-
-       
-        return Ok(quizzes);
-    }
-
-    [HttpGet("questions/{id}")]
-    public ActionResult<IEnumerable<Question>> GetQuizQuestions(int id)
-    {
-        var questions = _context.Questions.Where(q => q.QuizId == id).ToList();
-        return Ok(questions);
-    }
-
-    [HttpGet("quiz/{id}")]
-    public async Task<ActionResult<Quiz>> GetQuiz(int id)
-    {
-        var quiz = await _context.Quizzes.FindAsync(id);
-
-        if (quiz == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(quiz);
-    }
-
-    [HttpDelete("quiz/{id}")]
-    public async Task<ActionResult<Quiz>> DeleteQuiz(int id)
-    {
-        var quiz = await _context.Quizzes.FindAsync(id);
-        if (quiz == null)
-        {
-            return NotFound();
-        }
-
-        _context.Quizzes.Remove(quiz);
-        await _context.SaveChangesAsync();
-
-        return Ok(quiz);
-    }
-
     [HttpPost("submit")]
     public ActionResult SubmitQuiz(QuizSubmission submission)
     {

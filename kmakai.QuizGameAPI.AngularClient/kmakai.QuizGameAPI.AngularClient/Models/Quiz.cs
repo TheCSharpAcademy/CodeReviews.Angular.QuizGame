@@ -6,7 +6,7 @@ public class Quiz
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
 
-    public ICollection<Question> Questions { get; set; } = null!;
-    public ICollection<Game> Games { get; set; } = null!;
+    public List<Question>? Questions { get; set; } 
+    public List<Game>? Games { get; set; } 
   
 }

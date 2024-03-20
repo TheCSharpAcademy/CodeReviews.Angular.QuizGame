@@ -2,6 +2,7 @@
 using kmakai.QuizGameAPI.AngularClient.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace kmakai.QuizGameAPI.AngularClient.Controllers;
 
@@ -10,7 +11,7 @@ namespace kmakai.QuizGameAPI.AngularClient.Controllers;
 public class QuizController : ControllerBase
 {
     private readonly QuizContext _context;
-    
+
     public QuizController(QuizContext context)
     {
         _context = context;
@@ -19,14 +20,14 @@ public class QuizController : ControllerBase
     [HttpGet("quizzes")]
     public async Task<ActionResult<Quiz>> GetQuizzes()
     {
-        var quizzes =  _context.Quizzes.ToList();
-        
-       if (quizzes == null)
+        var quizzes = _context.Quizzes.ToList();
+
+        if (quizzes == null)
         {
             return NotFound();
         }
 
-       
+
         return Ok(quizzes);
     }
 
@@ -68,10 +69,40 @@ public class QuizController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Quiz>> PostQuiz(Quiz quiz)
     {
-        _context.Quizzes.Add(quiz);
-        await _context.SaveChangesAsync();
+
+        try
+        {
+            _context.Quizzes.Add(quiz);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        Console.WriteLine("Quiz added: " + quiz.Id);
 
         return CreatedAtAction("GetQuiz", new { id = quiz.Id }, quiz);
+    }
+
+    [HttpPost("questions")]
+    public async Task<IActionResult> PostQuestions(List<object> questions)
+    {
+        Console.WriteLine("Questions received: {0}", questions.Count());
+        foreach (var question in questions)
+        {
+            Console.WriteLine(question.GetType());
+            var jString = question.ToString();
+            Question q = JsonSerializer.Deserialize<Question>(jString);
+           
+            Console.WriteLine("Question: {0}", q.Text);
+            Console.WriteLine("Option1: {0}", q.Option1);
+            Console.WriteLine("quizid: {0}", q.QuizId);
+            _context.Questions.Add(q);
+        }
+
+        await _context.SaveChangesAsync();
+        return Ok(questions);
     }
 
     [HttpPost("question")]
