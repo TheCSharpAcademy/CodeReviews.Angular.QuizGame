@@ -1,1 +1,314 @@
-<p>quiz-creator works!</p>
+<div class="pageContainer position-relative">
+  <h1>Create a Quiz</h1>
+  <div class="d-flex gap-4 flex-wrap">
+    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+      <div class="quizInfo d-flex flex-column">
+        <h2>Quiz</h2>
+        <div class="form-group">
+          <label for="quizName">Quiz Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="quizName"
+            id="quizName"
+            formControlName="name"
+            required="true"
+          />
+          <div
+            *ngIf="
+              quizForm.get('name')?.invalid &&
+              (quizForm.get('name')?.touched || quizForm.get('name')?.dirty)
+            "
+          >
+            <div
+              *ngIf="quizForm.get('name')?.errors?.['required']"
+              class="my-2 text-danger"
+            >
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group mt-2">
+          <label for="quizDescription">Quiz Description</label>
+          <textarea
+            type="text"
+            name="quizDescription"
+            id="quizDescription"
+            class="form-control"
+            formControlName="description"
+            required="true"
+          ></textarea>
+          <div
+            *ngIf="
+              quizForm.get('description')?.invalid &&
+              (quizForm.get('description')?.touched ||
+                quizForm.get('description')?.dirty)
+            "
+          >
+            <div
+              *ngIf="quizForm.get('description')?.errors?.['required']"
+              class="my-2 text-danger"
+            >
+              Description is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn text-white mt-4"
+        style="background-color: blueviolet; border-color: blueviolet"
+        [disabled]="quizForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+    <div class="questions flex-fill">
+      <h2 class="d-flex justify-content-between" style="width: 100%">
+        Questions
+        <button
+          type="button"
+          class="btn text-white ms-auto addQuestionBtn"
+          style="background-color: #673ab7"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+          [disabled]="questions.length >= 10"
+        >
+          Add Question
+        </button>
+      </h2>
+
+      <div class="questionsList">
+        <ul class="d-flex flex-column" style="height: 500px">
+          <li
+            *ngFor="let question of questions; index as i"
+            class="d-flex align-items-center"
+          >
+            <div class="question d-flex gap-2 align-items-center">
+              <h3>{{ i + 1 }}.</h3>
+              <h3>{{ question.Text }}</h3>
+            </div>
+            <div class="ms-auto d-flex align-items-center gap-2">
+              <button
+                type="button"
+                class="btn text-white"
+                style="background-color: #673ab7"
+                (click)="deleteQuestion(i)"
+              >
+                Delete
+              </button>
+
+              <button
+                type="button"
+                class="btn text-white"
+                style="background-color: #673ab7"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+                (click)="editQuestion(i)"
+              >
+                edit
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form
+          #qform
+          [formGroup]="questionForm"
+          (ngSubmit)="addQuestion(qform)"
+          class="d-flex flex-column gap-2 p-4 rounded shadow-sm text-white"
+          style="background-color: #673ab7"
+        >
+          <div class="modal-body d-flex flex-column gap-3">
+            <div class="form-group">
+              <label for="question">Question</label>
+              <input
+                type="text"
+                name="question"
+                id=""
+                class="form-control"
+                formControlName="Text"
+                [required]="true"
+              />
+              <div
+                *ngIf="
+                  questionForm.get('Text')?.invalid &&
+                  (questionForm.get('Text')?.touched ||
+                    questionForm.get('Text')?.dirty)
+                "
+              >
+                <div
+                  *ngIf="questionForm.get('Text')?.errors?.['required']"
+                  class="my-2 text-danger bg-white rounded"
+                >
+                  Question is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="correctAnswer">Correct Answer</label>
+              <input
+                type="text"
+                name="correctAnswer"
+                id=""
+                class="form-control"
+                formControlName="Answer"
+                [required]="true"
+              />
+              <div
+                *ngIf="
+                  questionForm.get('Answer')?.invalid &&
+                  (questionForm.get('Answer')?.touched ||
+                    questionForm.get('Answer')?.dirty)
+                "
+              >
+                <div
+                  *ngIf="questionForm.get('Answer')?.errors?.['required']"
+                  class="my-2 text-danger bg-white rounded"
+                >
+                  Correct answer required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="answer1">Answer 1</label>
+              <input
+                type="text"
+                name="answer1"
+                id=""
+                class="form-control"
+                formControlName="Option1"
+                [required]="true"
+              />
+              <div
+                *ngIf="
+                  questionForm.get('Option1')?.invalid &&
+                  (questionForm.get('Option1')?.touched ||
+                    questionForm.get('Option1')?.dirty)
+                "
+              >
+                <div
+                  *ngIf="questionForm.get('Option1')?.errors?.['required']"
+                  class="my-2 text-danger bg-white rounded"
+                >
+                  All answers required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="answer2">Answer 2</label>
+              <input
+                type="text"
+                name="answer2"
+                id=""
+                class="form-control"
+                formControlName="Option2"
+                [required]="true"
+              />
+              <div
+                *ngIf="
+                  questionForm.get('Option2')?.invalid &&
+                  (questionForm.get('Option2')?.touched ||
+                    questionForm.get('Option2')?.dirty)
+                "
+              >
+                <div
+                  *ngIf="questionForm.get('Option2')?.errors?.['required']"
+                  class="my-2 text-danger bg-white rounded"
+                >
+                  All answers required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="answer3">Answer 3</label>
+              <input
+                type="text"
+                name="answer3"
+                id=""
+                class="form-control"
+                formControlName="Option3"
+                [required]="true"
+              />
+              <div
+                *ngIf="
+                  questionForm.get('Option3')?.invalid &&
+                  (questionForm.get('Option3')?.touched ||
+                    questionForm.get('Option3')?.dirty)
+                "
+              >
+                <div
+                  *ngIf="questionForm.get('Option3')?.errors?.['required']"
+                  class="my-2 text-danger bg-white rounded"
+                >
+                  All answers required
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="answer4">Answer 4</label>
+              <input
+                type="text"
+                name="answer4"
+                id=""
+                class="form-control"
+                formControlName="Option4"
+                [required]="true"
+              />
+              <div
+                *ngIf="
+                  questionForm.get('Option4')?.invalid &&
+                  (questionForm.get('Option4')?.touched ||
+                    questionForm.get('Option4')?.dirty)
+                "
+              >
+                <div
+                  *ngIf="questionForm.get('Option4')?.errors?.['required']"
+                  class="my-2 text-danger bg-white rounded"
+                >
+                  All answers required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn text-white"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              type="submit"
+              class="btn text-white qFormBtn"
+              value="Add Question"
+              data-bs-dismiss="modal"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
