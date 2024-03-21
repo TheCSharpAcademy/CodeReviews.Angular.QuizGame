@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="list-container border rounded my-2 shadow-sm p-3">
+    <h1 class="text-primary my-2">{{ quiz.name }} Quiz</h1>
+
+    <mat-list role="list">
+      <mat-list-item class="h-25" role="listitem" *ngFor="let q of dataSource">
+        <p *ngIf="q.id.toString().length > 1" class="w-100 text-start">
+          {{ q.id.toString()[1] == "0" ? 10 : q.id.toString()[1] }} -
+          {{ q.text }}
+        </p>
+        <p *ngIf="q.id.toString().length == 1" class="w-100 text-start">
+          {{ q.id }} -
+          {{ q.text }}
+        </p>
+
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          (change)="onAnswer(q, $event.value)"
+          value="{{ q.userAnswer ? q.userAnswer : '' }}"
+        >
+          <mat-radio-button
+            color="primary"
+            class="example-radio-button"
+            [value]="q.option1"
+          >
+            {{ q.option1 }}
+          </mat-radio-button>
+          <mat-radio-button
+            color="primary"
+            class="example-radio-button"
+            [value]="q.option2"
+          >
+            {{ q.option2 }}
+          </mat-radio-button>
+          <mat-radio-button
+            color="primary"
+            class="example-radio-button"
+            [value]="q.option3"
+          >
+            {{ q.option3 }}
+          </mat-radio-button>
+          <mat-radio-button
+            color="primary"
+            class="example-radio-button"
+            [value]="q.option4"
+          >
+            {{ q.option4 }}
+          </mat-radio-button>
+
+          <button mat-raised-button color="primary" class="hidden">
+            <mat-icon>check</mat-icon> {{ q.answer }}
+          </button>
+        </mat-radio-group>
+      </mat-list-item>
+      <mat-list-item class="h-25" role="listitem">
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Submit
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-paginator
+      #paginator
+      [length]="dataSize"
+      [pageSize]="2"
+      [pageSizeOptions]="[2, 3, 4]"
+    >
+    </mat-paginator>
+  </div>
+</div>
