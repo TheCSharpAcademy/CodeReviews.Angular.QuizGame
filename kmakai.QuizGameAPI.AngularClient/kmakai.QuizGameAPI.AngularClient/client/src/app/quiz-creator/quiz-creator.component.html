@@ -58,7 +58,7 @@
         type="submit"
         class="btn text-white mt-4"
         style="background-color: blueviolet; border-color: blueviolet"
-        [disabled]="quizForm.invalid"
+        [disabled]="quizForm.invalid || questions.length < 10"
       >
         Submit
       </button>
@@ -66,6 +66,9 @@
     <div class="questions flex-fill">
       <h2 class="d-flex justify-content-between" style="width: 100%">
         Questions
+        <small class="text-mutedn mx-auto fs-6"
+          >{{ questions.length }} / 10 questions</small
+        >
         <button
           type="button"
           class="btn text-white ms-auto addQuestionBtn"
