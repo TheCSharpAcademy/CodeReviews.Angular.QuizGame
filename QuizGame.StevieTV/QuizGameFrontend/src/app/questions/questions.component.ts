@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { ActivatedRoute } from "@angular/router";
 import { QuizService } from '../quiz.service';
 
 @Component({
@@ -14,12 +15,10 @@ import { QuizService } from '../quiz.service';
 export class QuestionsComponent implements OnInit {
 
   questions: any;
-  constructor(public quizService: QuizService) {}
+  constructor(public quizService: QuizService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.quizService.getQuestions().subscribe(res => this.questions = res);
+    let quizId = Number(this.route.snapshot.paramMap.get('quizId'));
+    this.quizService.getQuestions(quizId).subscribe(res => this.questions = res);
   }
-
-
-
 }

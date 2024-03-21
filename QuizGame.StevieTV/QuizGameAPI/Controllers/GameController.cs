@@ -71,8 +71,22 @@ namespace QuizGameAPI.Controllers
         // POST: api/Game
         // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Game>> PostGame(Game game)
+        public async Task<ActionResult<Game>> PostGame(GameDTO gameDto)
         {
+            if (!QuizExists(gameDto.QuizId))
+            {
+                return NotFound("The quiz you are trying to add a played game to does not exist");
+            }
+
+            var game = new Game
+            {
+                PlayerName = gameDto.PlayerName,
+                Score = gameDto.Score,
+                PotentialTotal = gameDto.PotentialTotal,
+                QuizId = gameDto.QuizId,
+            };
+
+
             _context.Games.Add(game);
             await _context.SaveChangesAsync();
 

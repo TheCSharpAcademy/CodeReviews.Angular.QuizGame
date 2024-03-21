@@ -1,11 +1,13 @@
 import { NgIf } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Question } from '../question.model';
+import { QuestionsComponent } from "../questions/questions.component";
 import { QuizService } from '../quiz.service';
 
 @Component({
@@ -18,6 +20,7 @@ import { QuizService } from '../quiz.service';
     MatButtonModule,
     MatIconModule,
     NgIf,
+    QuestionsComponent,
   ],
   templateUrl: './add-question.component.html',
   styleUrl: './add-question.component.css',
@@ -30,7 +33,7 @@ export class AddQuestionComponent implements OnInit{
     answer2: '',
     answer3: '',
     correctAnswer: 1,
-    QuizId: 1
+    QuizId: 0
   };
 
   emptyQuestion: Question = {
@@ -40,17 +43,17 @@ export class AddQuestionComponent implements OnInit{
     answer2: '',
     answer3: '',
     correctAnswer: 1,
-    QuizId: 1
+    QuizId: 0
   };
 
-  constructor(private quizService: QuizService) {}
+  constructor(private quizService: QuizService, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.newQuestion.QuizId  = Number(this.route.snapshot.paramMap.get('quizId'));
     this.quizService.questionSelected.subscribe(question => this.newQuestion = question)
   }
 
   addQuestion() {
-    console.log(this.newQuestion.questionPrompt + this.newQuestion.answer1 + this.newQuestion.answer2 + this.newQuestion.answer3 + this.newQuestion.correctAnswer);
     this.quizService.addQuestion(this.newQuestion).subscribe(res =>
       console.log(res));
   }

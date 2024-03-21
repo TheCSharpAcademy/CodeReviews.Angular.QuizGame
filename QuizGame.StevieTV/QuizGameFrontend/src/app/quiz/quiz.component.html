@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <span *ngIf="quiz.id">Edit Quiz</span>
+      <span *ngIf="!quiz.id">Add Quiz</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form #questionForm="ngForm">
+      <input hidden name="id" [(ngModel)]="quiz.id">
+      <mat-form-field class="fullWidth">
+        <mat-label>Quiz Name</mat-label>
+        <input matInput name="NamePrompt" [(ngModel)]="quiz.name" required/>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="!quiz.id" mat-fab extended color="primary" (click)="addQuiz()"
+            [disabled]="questionForm.form.invalid">
+      <mat-icon fontIcon="save"></mat-icon>
+      Save
+    </button>
+    <button *ngIf="quiz.id" mat-fab extended color="primary" (click)="editQuiz()" [disabled]="questionForm.form.invalid">
+      <mat-icon fontIcon="save"></mat-icon>
+      Edit
+    </button>
+    <button mat-fab extended color="primary" (click)="quiz = emptyQuiz">
+      <mat-icon fontIcon="add"></mat-icon>
+      New
+    </button>
+    <button *ngIf="quiz.id" mat-fab extended color="primary" [routerLink]="['/addQuestion', quiz.id]" [disabled]="questionForm.form.invalid">
+      <mat-icon fontIcon="add"></mat-icon>
+      Edit Questions
+    </button>
+    <button *ngIf="quiz.id" mat-fab extended color="warn" (click)="deleteQuiz()">
+      <mat-icon fontIcon="delete"></mat-icon>
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>
+<mat-card>
+  <app-quizzes/>
+</mat-card>

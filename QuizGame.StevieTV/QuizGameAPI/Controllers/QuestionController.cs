@@ -24,18 +24,19 @@ namespace QuizGameAPI.Controllers
             return questions.Select(x => x.ToQuestionDTO()).ToList();
         }
         
-        // GET: api/Quiz/{id}/Questions
-        [HttpGet]
-        [Route("/api/Quiz/{id}/Questions")]
-        public async Task<ActionResult<IEnumerable<Question>>> GetQuestionsByQuiz(int id)
+        // GET: api/Questions/{id}
+        [HttpGet()]
+        [Route("/api/Questions/{quizId}")]
+        public async Task<ActionResult<IEnumerable<Question>>> GetQuestionsByQuiz(int quizId)
         {
-            var questions = await _context.Questions.Include(q => q.Quiz).Where(question => question.QuizId == id).ToListAsync();
+            // var questions = await _context.Questions.Include(q => q.Quiz).Where(question => question.QuizId == id).ToListAsync();
+            // var questions = await _context.Questions.Where(q => q.QuizId == quizId).ToListAsync();
 
-            foreach (var q in questions)
-            {
-                Console.WriteLine($"Question id {q.Id} has quiz id {q.QuizId} with name {q.Quiz.Name}");
-            }
-            return await _context.Questions.Where(question => question.QuizId == id).ToListAsync();
+            // foreach (var q in questions)
+            // {
+            //     Console.WriteLine($"Question id {q.Id} has quiz id {q.QuizId} with name {q.Quiz.Name}");
+            // }
+            return await _context.Questions.Where(q => q.QuizId == quizId).ToListAsync();
         }
 
         // GET: api/Question/5
@@ -98,7 +99,7 @@ namespace QuizGameAPI.Controllers
         {
             if (!QuizExists(questionDto.QuizId))
             {
-                return BadRequest("The Quiz you are trying to add a question to does not exist");
+                return NotFound("The Quiz you are trying to add a question to does not exist");
             }
             var question = new Question
             {
