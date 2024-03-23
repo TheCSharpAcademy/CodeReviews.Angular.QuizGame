@@ -81,11 +81,11 @@ export class PlayquizComponent implements OnInit {
             this.game.score++;
           break;
         case 2:
-          if (q.selectedAnswer == q.answer1)
+          if (q.selectedAnswer == q.answer2)
             this.game.score++;
           break;
         case 3:
-          if (q.selectedAnswer == q.answer1)
+          if (q.selectedAnswer == q.answer3)
             this.game.score++;
           break;
       }

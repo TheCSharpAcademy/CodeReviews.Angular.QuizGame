@@ -12,7 +12,7 @@ builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Re
 builder.Services.AddDbContext<QuizContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("QuizGame") ?? throw new InvalidOperationException("Connection string not found")));
 
-
+builder.Services.AddScoped<QuizContext>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,6 +26,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    using var scope = app.Services.CreateScope();
+    SeedDatabase.Seed(scope.ServiceProvider.GetService<QuizContext>()!);
 }
 
 app.UseCors(options => 
