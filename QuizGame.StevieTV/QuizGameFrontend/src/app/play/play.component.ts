@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
+import { RouterLink } from "@angular/router";
 import { QuizService } from "../quiz.service";
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
@@ -13,7 +14,8 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
     MatCardModule,
     MatListModule,
     CommonModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterLink
   ],
   templateUrl: './play.component.html',
   styleUrl: './play.component.css'

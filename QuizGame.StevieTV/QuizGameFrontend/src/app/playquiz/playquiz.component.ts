@@ -10,9 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
-
-
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-playquiz',
@@ -25,12 +23,13 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatRadioModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   templateUrl: './playquiz.component.html',
   styleUrl: './playquiz.component.css'
 })
-export class PlayquizComponent  implements OnInit {
+export class PlayquizComponent implements OnInit {
 
   questions: any;
   quizId: number | undefined;
@@ -44,8 +43,9 @@ export class PlayquizComponent  implements OnInit {
       score: 0
     };
 
-  constructor(public quizService: QuizService, private route: ActivatedRoute ) {
+  constructor(public quizService: QuizService, private route: ActivatedRoute) {
   }
+
   ngOnInit() {
     this.quizId = Number(this.route.snapshot.paramMap.get('quizId'));
     this.quizService.getQuestions(this.quizId).subscribe(res => {
@@ -53,7 +53,7 @@ export class PlayquizComponent  implements OnInit {
 
       // @ts-ignore
       this.questions.forEach(q => {
-        q.answers = [ q.answer1, q.answer2, q.answer3 ]
+        q.answers = [q.answer1, q.answer2, q.answer3]
         shuffle(q.answers)
 
       })
@@ -71,7 +71,7 @@ export class PlayquizComponent  implements OnInit {
     this.step++;
   }
 
-  finishQuiz(){
+  finishQuiz() {
     this.game.score = 0;
     // @ts-ignore
     this.questions.forEach(q => {
