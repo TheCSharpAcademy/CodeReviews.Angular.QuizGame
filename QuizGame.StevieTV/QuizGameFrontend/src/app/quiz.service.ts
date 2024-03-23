@@ -75,4 +75,9 @@ export class QuizService {
     let gameUrl = this.baseUrl + '/Game'
     return this.http.post<Game>(gameUrl, game, this.httpOptions);
   }
+
+  getGames() {
+    let gameUrl = this.baseUrl + '/Game'
+    return this.http.get<Game>(gameUrl, this.httpOptions);
+  }
 }
