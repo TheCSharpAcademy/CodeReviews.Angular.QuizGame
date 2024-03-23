@@ -12,3 +12,7 @@
 .nameInput {
   width: 40%;
 }
+
+.left {
+  justify-content: flex-start;
+}

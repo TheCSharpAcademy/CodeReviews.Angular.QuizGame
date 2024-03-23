@@ -19,7 +19,7 @@
           <mat-radio-button class="radio-button" *ngFor="let answer of question.answers" [value]="answer">{{answer}}</mat-radio-button>
       </mat-radio-group>
 
-      <mat-action-row>
+      <mat-action-row class="left">
         <button mat-button color="primary" (click)="nextStep()">Next</button>
       </mat-action-row>
     </mat-expansion-panel>
