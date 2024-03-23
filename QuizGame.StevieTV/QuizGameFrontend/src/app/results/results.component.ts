@@ -1,3 +1,4 @@
+import { PercentPipe } from "@angular/common";
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
@@ -9,7 +10,7 @@ import { QuizService } from "../quiz.service";
 @Component({
   selector: 'app-results',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule],
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, PercentPipe],
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'
 })
@@ -31,9 +32,4 @@ export class ResultsComponent {
       this.dataSource.sort = this.sort;
     })
   }
-
-  calculatePercentage(score: number, potentialScore: number) {
-    return((score/potentialScore).toLocaleString("en", {style: "percent"}))
-  }
-
 }
