@@ -1,6 +1,14 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
+    Editing Quiz - {{quiz.name}}
+    </mat-card-title>
+  </mat-card-header>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
     <span *ngIf="newQuestion.id">Edit Question</span>
     <span *ngIf="!newQuestion.id">Add Question</span>
     </mat-card-title>
@@ -50,4 +58,5 @@
     </button>
   </mat-card-actions>
 </mat-card>
+<mat-divider></mat-divider>
 <app-questions />

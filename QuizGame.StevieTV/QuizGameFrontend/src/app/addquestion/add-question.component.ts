@@ -1,5 +1,6 @@
 import { NgIf } from "@angular/common";
 import { Component, OnInit } from '@angular/core';
+import { MatDivider } from "@angular/material/divider";
 import { ActivatedRoute } from "@angular/router";
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +22,7 @@ import { QuizService } from '../quiz.service';
     MatIconModule,
     NgIf,
     QuestionsComponent,
+    MatDivider,
   ],
   templateUrl: './add-question.component.html',
   styleUrl: './add-question.component.css',
@@ -46,11 +48,14 @@ export class AddQuestionComponent implements OnInit{
     QuizId: 0
   };
 
+  quiz: any;
+
   constructor(private quizService: QuizService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.newQuestion.QuizId  = Number(this.route.snapshot.paramMap.get('quizId'));
+    this.newQuestion.QuizId = Number(this.route.snapshot.paramMap.get('quizId'));
     this.quizService.questionSelected.subscribe(question => this.newQuestion = question)
+    this.quizService.getQuiz(this.newQuestion.QuizId).subscribe(res => this.quiz = res);
   }
 
   addQuestion() {
