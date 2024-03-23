@@ -67,6 +67,11 @@ export class QuizService {
     let quizUrl = this.baseUrl + '/Quiz'
     return this.http.get(quizUrl, this.httpOptions);
   }
+
+  getQuiz(id: number){
+    let quizUrl = this.baseUrl + '/Quiz/' + id;
+    return this.http.get(quizUrl, this.httpOptions);
+  }
   selectQuiz(quiz: Quiz) {
     this.selectedQuiz.next(quiz);
   }

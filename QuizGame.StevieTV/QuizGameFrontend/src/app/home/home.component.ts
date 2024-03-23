@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { AddQuestionComponent } from "../addquestion/add-question.component";
-import { QuestionsComponent } from "../questions/questions.component";
+import {MatCardModule} from '@angular/material/card';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
     imports: [
-        AddQuestionComponent,
-        QuestionsComponent
+      MatCardModule
     ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
