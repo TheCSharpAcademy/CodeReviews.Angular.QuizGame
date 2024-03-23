@@ -6,11 +6,11 @@ import { MatCardModule } from "@angular/material/card";
 import { MatListModule } from "@angular/material/list";
 import { Game } from "../game.model";
 import { QuizService } from "../quiz.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-playquiz',
@@ -43,7 +43,7 @@ export class PlayquizComponent implements OnInit {
       score: 0
     };
 
-  constructor(public quizService: QuizService, private route: ActivatedRoute) {
+  constructor(public quizService: QuizService, private router: Router, private route: ActivatedRoute, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -92,6 +92,10 @@ export class PlayquizComponent implements OnInit {
     })
     console.log(this.game)
     this.quizService.addGame(this.game).subscribe(res => console.log(res));
+    let message = `Well Done ${this.game.playerName} - you scored ${this.game.score}/${this.game.potentialTotal}`
+    this._snackBar.open(message, "OK")
+      .onAction()
+      .subscribe(() => this.router.navigateByUrl('/'));
   }
 }
 
