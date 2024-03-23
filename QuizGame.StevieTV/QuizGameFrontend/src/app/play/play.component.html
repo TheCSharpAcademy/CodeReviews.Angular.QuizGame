@@ -1,9 +1,11 @@
 <mat-card>
   <mat-card-content>
-    <mat-list *ngFor="let quiz of quizzes">
+    <mat-list *ngFor="let quiz of pagedQuizzes">
       <mat-list-item class="clickableLink" (click)="quizService.selectQuiz(quiz)">{{quiz.name}}</mat-list-item>
-
     </mat-list>
+
+    <mat-paginator #paginator [length]="dataLength" [pageSize]="5" [pageSizeOptions]="[5,10,50]" (page)="OnPageChange($event)" aria-label="select page of questions">
+    </mat-paginator>
 
   </mat-card-content>
   <mat-card-actions>
