@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-content>
+
+    <mat-form-field class="nameInput">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="game.playerName">
+    </mat-form-field>
+
+    <mat-expansion-panel *ngFor="let question of questions; let i = index" [expanded]="step == i" (opened)="setStep(i)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ question.questionPrompt }}
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-radio-group class="radio-group" [(ngModel)]="question.selectedAnswer">
+          <mat-radio-button class="radio-button" *ngFor="let answer of question.answers" [value]="answer">{{answer}}</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-action-row class="left">
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="finishQuiz()">Finish</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-content>
+    <mat-list *ngFor="let question of pagedQuestions">
+      <mat-list-item class="clickableLink" (click)="quizService.selectQuestion(question)">{{question.questionPrompt}}</mat-list-item>
+    </mat-list>
+
+    <mat-paginator #paginator [length]="dataLength" [pageSize]="5" [pageSizeOptions]="[5,10,50]" (page)="OnPageChange($event)" aria-label="select page of questions">
+    </mat-paginator>
+
+  </mat-card-content>
+  <mat-card-actions>
+
+  </mat-card-actions>
+</mat-card>
