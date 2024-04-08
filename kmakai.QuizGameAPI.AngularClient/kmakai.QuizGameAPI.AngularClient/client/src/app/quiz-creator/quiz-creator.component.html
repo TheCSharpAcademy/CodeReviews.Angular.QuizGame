@@ -76,6 +76,7 @@
           data-bs-toggle="modal"
           data-bs-target="#staticBackdrop"
           [disabled]="questions.length >= 10"
+          (click)="questionForm.reset()"
         >
           Add Question
         </button>
