@@ -14,87 +14,87 @@ export class QuizCreatorComponent {
   quiz: any;
   index: number | null = null;
   questions: any[] = [
-    {
-      id: 1,
-      Text: 'What is 2+2?',
-      Answer: 4,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 6,
-    },
-    {
-      id: 2,
-      Text: "What's mah mfin name?",
-      Answer: 6,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 6,
-    },
-    {
-      id: 3,
-      Text: 'What is 4+4?',
-      Answer: 8,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 8,
-    },
-    {
-      id: 1,
-      Text: 'What is 2+2?',
-      Answer: 4,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 6,
-    },
-    {
-      id: 2,
-      Text: 'What is 3+3?',
-      Answer: 6,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 6,
-    },
-    {
-      id: 3,
-      Text: 'What is 4+4?',
-      Answer: 8,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 8,
-    },
-    {
-      id: 1,
-      Text: 'What is 2+2?',
-      Answer: 4,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 6,
-    },
-    {
-      id: 2,
-      Text: 'What is 3+3?',
-      Answer: 6,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 6,
-    },
-    {
-      id: 3,
-      Text: 'What is 4+4?',
-      Answer: 8,
-      Option1: 3,
-      Option2: 4,
-      Option3: 5,
-      Option4: 8,
-    },
+    // {
+    //   id: 1,
+    //   Text: 'What is 2+2?',
+    //   Answer: 4,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 6,
+    // },
+    // {
+    //   id: 2,
+    //   Text: "What's mah mfin name?",
+    //   Answer: 6,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 6,
+    // },
+    // {
+    //   id: 3,
+    //   Text: 'What is 4+4?',
+    //   Answer: 8,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 8,
+    // },
+    // {
+    //   id: 1,
+    //   Text: 'What is 2+2?',
+    //   Answer: 4,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 6,
+    // },
+    // {
+    //   id: 2,
+    //   Text: 'What is 3+3?',
+    //   Answer: 6,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 6,
+    // },
+    // {
+    //   id: 3,
+    //   Text: 'What is 4+4?',
+    //   Answer: 8,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 8,
+    // },
+    // {
+    //   id: 1,
+    //   Text: 'What is 2+2?',
+    //   Answer: 4,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 6,
+    // },
+    // {
+    //   id: 2,
+    //   Text: 'What is 3+3?',
+    //   Answer: 6,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 6,
+    // },
+    // {
+    //   id: 3,
+    //   Text: 'What is 4+4?',
+    //   Answer: 8,
+    //   Option1: 3,
+    //   Option2: 4,
+    //   Option3: 5,
+    //   Option4: 8,
+    // },
   ];
   constructor(private fb: FormBuilder, private quizService: QuizappService) {
     this.quizForm = this.fb.group({
@@ -140,7 +140,10 @@ export class QuizCreatorComponent {
   }
 
   addQuestion(form: HTMLElement) {
-    if (this.questionForm.invalid) return;
+    if (this.questionForm.invalid) {
+      this.questionForm.markAllAsTouched();
+      return;
+    }
     if (this.index == null) this.questions.push(this.questionForm.value);
     else {
       this.questions[this.index] = this.questionForm.value;

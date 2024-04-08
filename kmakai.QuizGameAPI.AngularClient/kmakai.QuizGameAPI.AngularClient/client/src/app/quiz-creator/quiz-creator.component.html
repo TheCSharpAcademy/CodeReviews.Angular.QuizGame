@@ -132,7 +132,7 @@
         <form
           #qform
           [formGroup]="questionForm"
-          (ngSubmit)="addQuestion(qform)"
+          (ngSubmit)="addQuestion(questionForm.value)"
           class="d-flex flex-column gap-2 p-4 rounded shadow-sm text-white"
           style="background-color: #673ab7"
         >
@@ -151,7 +151,7 @@
                 *ngIf="
                   questionForm.get('Text')?.invalid &&
                   (questionForm.get('Text')?.touched ||
-                    questionForm.get('Text')?.dirty)
+                    questionForm.get('Text')?.dirty) || questionForm.get('Text')?.errors?.['required']
                 "
               >
                 <div
@@ -177,7 +177,7 @@
                 *ngIf="
                   questionForm.get('Answer')?.invalid &&
                   (questionForm.get('Answer')?.touched ||
-                    questionForm.get('Answer')?.dirty)
+                    questionForm.get('Answer')?.dirty) || questionForm.get('Answer')?.errors?.['required']
                 "
               >
                 <div
@@ -203,7 +203,7 @@
                 *ngIf="
                   questionForm.get('Option1')?.invalid &&
                   (questionForm.get('Option1')?.touched ||
-                    questionForm.get('Option1')?.dirty)
+                    questionForm.get('Option1')?.dirty) || questionForm.get('Option1')?.errors?.['required']
                 "
               >
                 <div
@@ -229,13 +229,10 @@
                 *ngIf="
                   questionForm.get('Option2')?.invalid &&
                   (questionForm.get('Option2')?.touched ||
-                    questionForm.get('Option2')?.dirty)
+                    questionForm.get('Option2')?.dirty) || questionForm.get('Option2')?.errors?.['required']
                 "
               >
-                <div
-                  *ngIf="questionForm.get('Option2')?.errors?.['required']"
-                  class="my-2 text-danger bg-white rounded"
-                >
+                <div class="my-2 text-danger bg-white rounded">
                   All answers required
                 </div>
               </div>
@@ -254,13 +251,10 @@
                 *ngIf="
                   questionForm.get('Option3')?.invalid &&
                   (questionForm.get('Option3')?.touched ||
-                    questionForm.get('Option3')?.dirty)
+                    questionForm.get('Option3')?.dirty) || questionForm.get('Option3')?.errors?.['required']
                 "
               >
-                <div
-                  *ngIf="questionForm.get('Option3')?.errors?.['required']"
-                  class="my-2 text-danger bg-white rounded"
-                >
+                <div class="my-2 text-danger bg-white rounded">
                   All answers required
                 </div>
               </div>
@@ -279,13 +273,10 @@
                 *ngIf="
                   questionForm.get('Option4')?.invalid &&
                   (questionForm.get('Option4')?.touched ||
-                    questionForm.get('Option4')?.dirty)
+                    questionForm.get('Option4')?.dirty) || questionForm.get('Option4')?.errors?.['required']
                 "
               >
-                <div
-                  *ngIf="questionForm.get('Option4')?.errors?.['required']"
-                  class="my-2 text-danger bg-white rounded"
-                >
+                <div class="my-2 text-danger bg-white rounded">
                   All answers required
                 </div>
               </div>
@@ -306,6 +297,7 @@
               class="btn text-white qFormBtn"
               value="Add Question"
               data-bs-dismiss="modal"
+              [disabled]="questionForm.invalid ? true : false"
             >
               Add
             </button>
