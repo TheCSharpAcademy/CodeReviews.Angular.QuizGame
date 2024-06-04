@@ -1,0 +1,108 @@
+<div class="margin">
+
+@if(quizForm != null){
+    <mat-stepper [orientation]="(stepperOrientation | async)!" linear>
+        <mat-step [stepControl]="quizForm" label="Fill Quiz details">
+
+            <ng-template matStepContent>
+                <h2>Quiz Basic Information:</h2>
+                <form [formGroup]="quizForm">
+                    <div class="flex-container">
+                        <mat-form-field appearance="fill" class="big-field">
+                            <mat-label>Name</mat-label>
+                            <input matInput formControlName="name" type="text">
+                            @if(quizForm.controls.name.invalid && (quizForm.controls.name.dirty || quizForm.controls.name.touched)) {
+                                <mat-error>        
+                                  Name length must be between 3 and 100 characters.
+                                </mat-error>
+                              }
+                        </mat-form-field>
+                    </div>
+
+                    <div class="flex-container">
+                        <mat-form-field appearance="fill" class="big-field">
+                            <mat-label>Description:</mat-label>
+                            <textarea matInput formControlName="description"> </textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <button mat-flat-button color="warn" (click)="return()" class="field-button">Return</button>
+                        <button mat-flat-button matStepperNext [disabled]="!quizForm.valid" color="primary" class="field-button">Next</button>
+                    </div>
+                </form>
+            </ng-template>
+        </mat-step>
+
+        <mat-step label="Add Questions">
+            <ng-template matStepContent>
+                <h2>Quiz Questions:</h2>
+
+                <div class="flex-container">
+
+                    <div>
+                        <mat-list>
+                            <h4>Selected Questions</h4>
+                            @if(questionList != null){
+                                @for (question of questionList.totalSelectedQuestions; track $index) {
+                                    <mat-list-item>{{question.questionText}}</mat-list-item>
+                                }
+                            }
+                        </mat-list>
+                    </div>
+                    
+                    <span class="spacer"></span>
+                    <div>
+                        <h4>Question List</h4>
+                        <app-question-list #questionList [totalSelectedQuestions]="currentList"></app-question-list>
+                    </div>
+
+                </div>
+
+                <div>
+                    <button mat-flat-button color="warn" matStepperPrevious class="field-button">Back</button>
+                    <button mat-flat-button color="primary" matStepperNext class="field-button">Next</button>
+                </div>
+            </ng-template>
+        </mat-step>
+
+        <mat-step label="Review">
+            <ng-template matStepContent>
+                
+                <div>
+                    <mat-list>
+                        <mat-list-item><strong>Name:</strong> {{this.quizForm.value.name}}</mat-list-item>
+                        <mat-list-item><strong>Description:</strong> {{this.quizForm.value.description}}</mat-list-item>
+                    </mat-list>
+
+                </div>
+                
+                <div>
+                    <mat-list>
+                        <mat-list-item><strong>Questions:</strong> </mat-list-item>
+                        @for (question of questionList.totalSelectedQuestions; track $index) {
+                            <mat-list-item>{{question.questionText}}</mat-list-item>
+                        }
+                    </mat-list>
+                </div>
+
+                <div>
+                    <button mat-flat-button color="warn" matStepperPrevious class="field-button">Back</button>
+                    @if(this.id == 0){
+                        <button mat-flat-button color="primary" (click)="submitQuiz()" class="field-button">Create</button>
+                    }
+                    @else {
+                        <button mat-flat-button color="primary" (click)="submitQuiz()" class="field-button">Update</button>
+                    }
+                    
+                </div>
+            </ng-template>
+        </mat-step>
+    </mat-stepper>
+    
+}
+@else {
+    <mat-spinner mode="indeterminate"></mat-spinner>
+}
+
+</div>
