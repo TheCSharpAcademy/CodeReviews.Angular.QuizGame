@@ -26,6 +26,8 @@ namespace QuizGameAPI.Data
                 .WithMany(q => q.Questions)
                 .HasForeignKey(g => g.QuizId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Seed();
         }
     }
 }
