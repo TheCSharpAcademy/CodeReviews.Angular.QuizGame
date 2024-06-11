@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuizGameAPI.Models;
-using System.Diagnostics;
 
 namespace QuizGameAPI.Data
 {
