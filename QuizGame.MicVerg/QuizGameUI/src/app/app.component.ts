@@ -11,4 +11,5 @@ import { MainmenuComponent } from './mainmenu/mainmenu.component';
 })
 export class AppComponent {
   title = 'QuizGameUI';
+  
 }

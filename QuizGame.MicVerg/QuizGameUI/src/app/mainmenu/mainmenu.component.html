@@ -20,7 +20,7 @@
                 </p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="accent">Let's go!</button>
+                <button mat-raised-button color="accent" (click)="openDialog()">Let's go!</button>
             </mat-card-actions>
         </mat-card>
 
@@ -35,7 +35,7 @@
                 </p>
             </mat-card-content>
             <mat-card-actions class="mat-card-actions">
-                <button mat-raised-button color="accent">Let's go!</button>
+                <button mat-raised-button color="accent" (click)="fetchQuestionsByQuizId(2)">Let's go!</button>
             </mat-card-actions>
         </mat-card>
 
@@ -50,7 +50,7 @@
                 </p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="accent">Let's go!</button>
+                <button mat-raised-button color="accent" (click)="fetchQuestionsByQuizId(3)">Let's go!</button>
             </mat-card-actions>
         </mat-card>
     </div>

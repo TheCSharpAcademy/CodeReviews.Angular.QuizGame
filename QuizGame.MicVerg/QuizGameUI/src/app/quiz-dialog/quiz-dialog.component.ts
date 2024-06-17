@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { inject } from '@angular/core';
+
 
 @Component({
   selector: 'app-quiz-dialog',
@@ -9,5 +19,8 @@ import {MatDialogModule} from '@angular/material/dialog';
   styleUrl: './quiz-dialog.component.css'
 })
 export class QuizDialogComponent {
+  
+
+  
 
 }
