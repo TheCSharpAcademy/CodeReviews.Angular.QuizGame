@@ -20,10 +20,6 @@ export class MainmenuComponent {
   constructor(private quizService: QuizServiceService){
   }
 
-  ngOnInit() {
-    this.fetchQuestionsByQuizId(2);
-  }
-
   fetchQuestionsByQuizId(Id: number | string) {
     this.quizService.getQuestionsByQuizId(Id).subscribe(questions => { this.questions = questions;
       console.log(this.questions);
