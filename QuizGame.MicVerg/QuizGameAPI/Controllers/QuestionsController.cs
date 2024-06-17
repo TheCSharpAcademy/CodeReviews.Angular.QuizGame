@@ -18,23 +18,16 @@ namespace QuizGameAPI.Controllers
 
         // GET: api/Questions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Question>>> GetQuestionRecords()
+        public async Task<ActionResult<IEnumerable<Question>>> GetQuestionRecords([FromQuery] int? quizId)
         {
-            return await _context.QuestionRecords.ToListAsync();
-        }
+            IQueryable<Question> query = _context.QuestionRecords.AsQueryable();
 
-        // GET: api/Questions/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Question>> GetQuestion(int id)
-        {
-            var question = await _context.QuestionRecords.FindAsync(id);
-
-            if (question == null)
+            if (quizId.HasValue)
             {
-                return NotFound();
+                query = query.Where(q => q.QuizId == quizId.Value);
             }
 
-            return question;
+            return await query.ToListAsync();
         }
 
         // PUT: api/Questions/5

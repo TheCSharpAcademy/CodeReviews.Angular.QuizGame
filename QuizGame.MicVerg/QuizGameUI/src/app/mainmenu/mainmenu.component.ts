@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import { QuizServiceService } from '../quiz-service.service';
+import { Question } from '../question.model';
+
 
 @Component({
   selector: 'app-mainmenu',
@@ -12,4 +15,18 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class MainmenuComponent {
 
+  questions: Question[] = [];
+
+  constructor(private quizService: QuizServiceService){
+  }
+
+  ngOnInit() {
+    this.fetchQuestionsByQuizId(2);
+  }
+
+  fetchQuestionsByQuizId(Id: number | string) {
+    this.quizService.getQuestionsByQuizId(Id).subscribe(questions => { this.questions = questions;
+      console.log(this.questions);
+    });
+  }
 }
