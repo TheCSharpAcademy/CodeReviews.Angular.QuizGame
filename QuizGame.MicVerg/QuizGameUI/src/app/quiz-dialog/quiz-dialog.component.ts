@@ -7,20 +7,26 @@ import {
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
+  MatDialogConfig
 } from '@angular/material/dialog';
-import { inject } from '@angular/core';
+import { Inject } from '@angular/core';
+import { Question } from '../question.model';
+import { QuizServiceService } from '../quiz-service.service';
+import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
   selector: 'app-quiz-dialog',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, CommonModule],
   templateUrl: './quiz-dialog.component.html',
   styleUrl: './quiz-dialog.component.css'
 })
 export class QuizDialogComponent {
-  
-
-  
-
+  constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {}
 }
+  
+
+

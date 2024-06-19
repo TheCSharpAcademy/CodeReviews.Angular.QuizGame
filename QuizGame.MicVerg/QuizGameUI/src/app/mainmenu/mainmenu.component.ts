@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { QuizServiceService } from '../quiz-service.service';
 import { Question } from '../question.model';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -22,17 +23,23 @@ export class MainmenuComponent {
   constructor(private quizService: QuizServiceService, public dialog: MatDialog){
   }
 
-  ngOnInit() {
-    this.fetchQuestionsByQuizId(2);
+  async openQuestionsDialog(quizId: number | string) {
+    try {
+      const questions$ = this.quizService.getQuestionsByQuizId(quizId);
+      const questions = await firstValueFrom(questions$);
+      console.log(questions);
+
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.height = '80%';
+      dialogConfig.width = '60%';
+      dialogConfig.data = questions;
+
+      this.dialog.open(QuizDialogComponent, dialogConfig);
+    } catch (error) {
+      console.error('Failed to fetch questions:', error);
+    }
   }
 
-  fetchQuestionsByQuizId(Id: number | string) {
-    this.quizService.getQuestionsByQuizId(Id).subscribe(questions => { this.questions = questions;
-      console.log(this.questions);
-    });
-  }
-
-  openDialog() {
-    this.dialog.open(QuizDialogComponent);
-  }
+  
 }
+
