@@ -1,4 +1,4 @@
-<div class="questiondialog" *ngFor="let question of questions; index as i">
+<div class="questiondialog" *ngFor="let question of paginatedQuestions; index as i">
     <mat-dialog-content>
       <p class="questiondialog">Question {{question.id}}: {{ question.quizQuestion }}</p>
       <div>
@@ -8,3 +8,7 @@
       </div>
     </mat-dialog-content>
 </div>
+<div *ngIf="questions.length > 5">
+    <mat-paginator [length]="questions.length" [pageSize]="5" (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>

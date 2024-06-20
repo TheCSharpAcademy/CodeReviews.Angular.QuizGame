@@ -16,20 +16,33 @@ import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-quiz-dialog',
   standalone: true,
-  imports: [MatDialogModule, CommonModule, MatButtonModule],
+  imports: [MatDialogModule, CommonModule, MatButtonModule, MatPaginatorModule],
   templateUrl: './quiz-dialog.component.html',
   styleUrl: './quiz-dialog.component.css'
 })
 export class QuizDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {}
+  //questions: Question[];
+  paginatedQuestions: Question[] = [];
+  currentPageIndex = 0;
+  constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {this.updatePaginatedQuestions(this.currentPageIndex, 5);}
 
   selectAnswer(questionId: number, answerId: number) {
-}
+  }
+
+  onPageChange(event: PageEvent) {
+    this.updatePaginatedQuestions(event.pageIndex, event.pageSize);
+  }
+
+  updatePaginatedQuestions(pageIndex: number, pageSize: number) {
+    const startIdx = pageIndex * pageSize;
+    const endIdx = startIdx + pageSize;
+    this.paginatedQuestions = this.questions.slice(startIdx, endIdx);
+  }
 }
 
 
