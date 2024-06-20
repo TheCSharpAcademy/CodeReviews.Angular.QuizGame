@@ -30,16 +30,15 @@ export class MainmenuComponent {
       console.log(questions);
 
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.height = '80%';
-      dialogConfig.width = '60%';
+      dialogConfig.height = '90%';
+      dialogConfig.width = '80%';
       dialogConfig.data = questions;
+      dialogConfig.panelClass = 'custom-dialog-container';
 
       this.dialog.open(QuizDialogComponent, dialogConfig);
     } catch (error) {
       console.error('Failed to fetch questions:', error);
     }
   }
-
-  
 }
 

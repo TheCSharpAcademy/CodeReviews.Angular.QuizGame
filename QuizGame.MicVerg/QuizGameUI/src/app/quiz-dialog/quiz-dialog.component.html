@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>Quiz Questions</h2>
-<mat-dialog-content>
-  <div *ngFor="let question of questions">
-    <p>{{ question.quizQuestion }}</p>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button>No Thanks</button>
-  <button mat-button>Ok</button>
-</mat-dialog-actions>
+<div class="questiondialog" *ngFor="let question of questions; index as i">
+    <mat-dialog-content>
+      <p class="questiondialog">Question {{question.id}}: {{ question.quizQuestion }}</p>
+      <div>
+        <button mat-raised-button color="accent" style="margin-right: 15px; margin-bottom: 7px; display: flex; align-items: center; justify-content: center;" (click)="selectAnswer(i, 1)">Option 1: {{ question.answer1 }}</button>
+        <button mat-raised-button color="accent" style="margin-right: 15px; margin-bottom: 7px; display: flex; align-items: center; justify-content: center;" (click)="selectAnswer(i, 2)">Option 2: {{ question.answer2 }}</button>
+        <button mat-raised-button color="accent" style="margin-right: 15px; margin-bottom: 7px; display: flex; align-items: center; justify-content: center;" (click)="selectAnswer(i, 3)">Option 3: {{ question.answer3 }}</button>
+      </div>
+    </mat-dialog-content>
+</div>
