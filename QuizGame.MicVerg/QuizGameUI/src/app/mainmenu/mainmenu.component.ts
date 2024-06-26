@@ -30,7 +30,7 @@ export class MainmenuComponent {
       console.log(questions);
 
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.height = '90%';
+      dialogConfig.height = '75%';
       dialogConfig.width = '80%';
       dialogConfig.data = questions;
       dialogConfig.panelClass = 'custom-dialog-container';

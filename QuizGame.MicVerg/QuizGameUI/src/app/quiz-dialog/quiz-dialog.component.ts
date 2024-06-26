@@ -26,12 +26,18 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
   styleUrl: './quiz-dialog.component.css'
 })
 export class QuizDialogComponent {
-  //questions: Question[];
   paginatedQuestions: Question[] = [];
   currentPageIndex = 0;
-  constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {this.updatePaginatedQuestions(this.currentPageIndex, 5);}
+  constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {this.updatePaginatedQuestions(this.currentPageIndex, 3);}
 
   selectAnswer(questionId: number, answerId: number) {
+    if (answerId == this.questions[questionId].correctAnswer){
+      console.log("Correct!");
+    }
+    else{
+      console.log("Wrong!");
+    }
+    this.questions[questionId].isAnswerGiven = true;
   }
 
   onPageChange(event: PageEvent) {

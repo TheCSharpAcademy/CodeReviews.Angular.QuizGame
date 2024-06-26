@@ -6,4 +6,5 @@ export interface Question {
     answer3: string;
     correctAnswer: number;
     quizId: number;
+    isAnswerGiven?: boolean;
 }
