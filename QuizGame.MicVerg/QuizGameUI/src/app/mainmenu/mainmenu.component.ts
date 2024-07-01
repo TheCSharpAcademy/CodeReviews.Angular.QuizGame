@@ -27,7 +27,6 @@ export class MainmenuComponent {
     try {
       const questions$ = this.quizService.getQuestionsByQuizId(quizId);
       const questions = await firstValueFrom(questions$);
-      console.log(questions);
 
       const dialogConfig = new MatDialogConfig();
       dialogConfig.height = '75%';
