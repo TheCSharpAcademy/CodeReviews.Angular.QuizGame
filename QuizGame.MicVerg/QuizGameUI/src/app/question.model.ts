@@ -7,4 +7,6 @@ export interface Question {
     correctAnswer: number;
     quizId: number;
     isAnswerGiven?: boolean;
+    selectedAnswerIsCorrect?: boolean;
+    selectedAnswerId?: number;
 }

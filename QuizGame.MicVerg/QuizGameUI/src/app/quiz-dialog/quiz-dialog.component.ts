@@ -31,13 +31,14 @@ export class QuizDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {this.updatePaginatedQuestions(this.currentPageIndex, 3);}
 
   selectAnswer(questionId: number, answerId: number) {
-    if (answerId == this.questions[questionId].correctAnswer){
-      console.log("Correct!");
-    }
-    else{
-      console.log("Wrong!");
-    }
+    const question = this.questions[questionId];
+    question.isAnswerGiven = true;
+    question.selectedAnswerId = answerId;
+    
     this.questions[questionId].isAnswerGiven = true;
+
+    const isCorrect = answerId === question.correctAnswer;
+    question.selectedAnswerIsCorrect = isCorrect;
   }
 
   onPageChange(event: PageEvent) {
