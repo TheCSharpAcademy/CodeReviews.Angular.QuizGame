@@ -31,11 +31,18 @@ export class QuizDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {this.updatePaginatedQuestions(this.currentPageIndex, 3);}
 
   selectAnswer(questionId: number, answerId: number) {
-    const question = this.questions[questionId];
+    console.log("selectAnswer triggered, questionid: " + questionId + " answerId: " + answerId);
+    const question = this.questions.find(q => q.id === questionId);
+
+    if (!question) {
+      console.error('Question not found');
+      return;
+    }
+
     question.isAnswerGiven = true;
     question.selectedAnswerId = answerId;
     
-    this.questions[questionId].isAnswerGiven = true;
+    //this.questions[questionId].isAnswerGiven = true;
 
     const isCorrect = answerId === question.correctAnswer;
     question.selectedAnswerIsCorrect = isCorrect;

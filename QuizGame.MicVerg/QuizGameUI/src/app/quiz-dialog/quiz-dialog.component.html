@@ -1,17 +1,17 @@
-<div class="questiondialog" *ngFor="let question of paginatedQuestions; index as i">
+<div class="questiondialog" *ngFor="let question of paginatedQuestions; index as i;">
     <mat-dialog-content>
       <p class="questiondialog">Question {{question.id}}: {{ question.quizQuestion }}</p>
       <div>
         <div class="button-container">
-            <button mat-raised-button id="btnAnswer1" class="option-button" color="accent" style="margin-right: 15px; margin-bottom: 7px; display: flex; align-items: center; justify-content: center;" (click)="selectAnswer(i, 1)" [disabled]="question.isAnswerGiven">Option 1: {{ question.answer1 }}</button>
+            <button mat-raised-button id="btnAnswer1" class="option-button" color="accent" (click)="selectAnswer(question.id, 1)" [disabled]="question.isAnswerGiven">Option 1: {{ question.answer1 }}</button>
             <label for="btnAnswer1" class="option-label" *ngIf="question.selectedAnswerId === 1">{{ question.selectedAnswerIsCorrect? 'Correct!' : 'Wrong!' }}</label>
         </div>
         <div class="button-container">
-            <button mat-raised-button id="btnAnswer2" color="accent" style="margin-right: 15px; margin-bottom: 7px; display: flex; align-items: center; justify-content: center;" (click)="selectAnswer(i, 2)" [disabled]="question.isAnswerGiven">Option 2: {{ question.answer2 }}</button>
+            <button mat-raised-button id="btnAnswer2" class="option-button" color="accent" (click)="selectAnswer(question.id, 2)" [disabled]="question.isAnswerGiven">Option 2: {{ question.answer2 }}</button>
             <label for="btnAnswer2" class="option-label" *ngIf="question.selectedAnswerId === 2">{{ question.selectedAnswerIsCorrect? 'Correct!' : 'Wrong!' }}</label>
         </div>
         <div class="button-container">
-            <button mat-raised-button id="btnAnswer3" color="accent" style="margin-right: 15px; margin-bottom: 7px; display: flex; align-items: center; justify-content: center;" (click)="selectAnswer(i, 3)" [disabled]="question.isAnswerGiven">Option 3: {{ question.answer3 }}</button>
+            <button mat-raised-button id="btnAnswer3" class="option-button" color="accent" (click)="selectAnswer(question.id, 3)" [disabled]="question.isAnswerGiven">Option 3: {{ question.answer3 }}</button>
             <label for="btnAnswer3" class="option-label" *ngIf="question.selectedAnswerId === 3">{{ question.selectedAnswerIsCorrect? 'Correct!' : 'Wrong!' }}</label>
       </div>
     </div>

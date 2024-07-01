@@ -22,7 +22,6 @@ export class MainmenuComponent {
 
   constructor(private quizService: QuizServiceService, public dialog: MatDialog){
   }
-
   async openQuestionsDialog(quizId: number | string) {
     try {
       const questions$ = this.quizService.getQuestionsByQuizId(quizId);
