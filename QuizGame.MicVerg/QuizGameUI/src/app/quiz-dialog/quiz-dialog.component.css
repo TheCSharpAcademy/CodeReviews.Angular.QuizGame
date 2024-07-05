@@ -27,3 +27,11 @@
   .option-button{
     margin-right: 15px; margin-bottom: 7px; display: flex; align-items: center; justify-content: center;
   }
+
+  .submitbutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    padding: 10px;
+}
