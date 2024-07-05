@@ -24,6 +24,14 @@ export class QuizServiceService {
     return this.http.get<Question[]>(`${this.apiQuestionsUrl}${Id}`);
   }
 
+  getGames(): Observable<Game[]>{
+    return this.http.get<Game[]>(`${this.apiGamesUrl}`);
+  }
+
+  addGame(game: Game): Observable<Game> {
+    return this.http.post<Game>(this.apiGamesUrl, game, this.httpOptions);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

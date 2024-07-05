@@ -17,6 +17,7 @@ import { firstValueFrom } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { Game } from '../game.model';
 
 @Component({
   selector: 'app-quiz-dialog',
@@ -31,7 +32,7 @@ export class QuizDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public questions: Question[]) {this.updatePaginatedQuestions(this.currentPageIndex, 3);}
 
   selectAnswer(questionId: number, answerId: number) {
-    console.log("selectAnswer triggered, questionid: " + questionId + " answerId: " + answerId);
+    //console.log("selectAnswer triggered, questionid: " + questionId + " answerId: " + answerId);
     const question = this.questions.find(q => q.id === questionId);
 
     if (!question) {
@@ -41,8 +42,6 @@ export class QuizDialogComponent {
 
     question.isAnswerGiven = true;
     question.selectedAnswerId = answerId;
-    
-    //this.questions[questionId].isAnswerGiven = true;
 
     const isCorrect = answerId === question.correctAnswer;
     question.selectedAnswerIsCorrect = isCorrect;

@@ -7,6 +7,7 @@ import { Question } from '../question.model';
 import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
+import { Game } from '../game.model';
 
 
 @Component({
@@ -19,9 +20,15 @@ import { firstValueFrom } from 'rxjs';
 export class MainmenuComponent {
 
   questions: Question[] = [];
+  games: Game[] = [];
 
   constructor(private quizService: QuizServiceService, public dialog: MatDialog){
   }
+
+  ngOnInit(): void {
+    
+  }
+
   async openQuestionsDialog(quizId: number | string) {
     try {
       const questions$ = this.quizService.getQuestionsByQuizId(quizId);
@@ -36,6 +43,17 @@ export class MainmenuComponent {
       this.dialog.open(QuizDialogComponent, dialogConfig);
     } catch (error) {
       console.error('Failed to fetch questions:', error);
+    }
+  }
+
+  async getGames() {
+    try {
+      const games$ = this.quizService.getGames();
+      const games = await firstValueFrom(games$);
+      console.log(games);
+      this.games = games;
+    } catch (error) {
+      console.error('Failed to fetch games:', error);
     }
   }
 }
