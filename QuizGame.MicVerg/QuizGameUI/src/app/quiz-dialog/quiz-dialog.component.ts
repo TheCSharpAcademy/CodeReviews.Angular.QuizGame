@@ -47,9 +47,23 @@ export class QuizDialogComponent {
     question.selectedAnswerIsCorrect = isCorrect;
   }
 
-  onPageChange(event: PageEvent) {
-    this.updatePaginatedQuestions(event.pageIndex, event.pageSize);
+
+  submitAnswers() {
+
   }
+
+get isLastPage(): boolean {
+  const pageSize = 3;
+  const totalPages = Math.ceil(this.questions.length / pageSize);
+  return this.currentPageIndex + 1 === totalPages;
+}
+
+
+onPageChange(event: PageEvent) {
+  this.currentPageIndex = event.pageIndex;
+  this.updatePaginatedQuestions(this.currentPageIndex, event.pageSize);
+}
+
 
   updatePaginatedQuestions(pageIndex: number, pageSize: number) {
     const startIdx = pageIndex * pageSize;
