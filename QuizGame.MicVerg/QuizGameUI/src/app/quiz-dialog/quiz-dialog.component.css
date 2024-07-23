@@ -20,7 +20,13 @@
     gap: 5px;
   }
 
-  .option-label {
+.player-input {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.option-label {
     color: white;
   }
 
@@ -33,5 +39,6 @@
     align-items: center;
     justify-content: center;
     width: auto;
+    height: 60px;
     padding: 10px;
 }

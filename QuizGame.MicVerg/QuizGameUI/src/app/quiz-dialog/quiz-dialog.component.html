@@ -24,7 +24,21 @@
         </mat-paginator>
     </div>
 
-    <div *ngIf="isLastPage" class="submitbutton">
-        <button mat-raised-button color="accent" (click)="submitAnswers()">Submit Answers</button>
+    <div *ngIf="isLastPage">
+        
     </div>
+
+    <div *ngIf="isLastPage" class="submitbutton">
+        <div class="player-input">
+            <mat-form-field>
+                <mat-label>Enter your name</mat-label>
+                <input matInput [(ngModel)]="playerName" placeholder="Your Name">
+            </mat-form-field>
+            
+            <button mat-raised-button id="btnSubmitAnswers" color="accent" (click)="submitAnswers()" [disabled]="!playerName || isButtonDisabled">Submit Answers</button>
+            
+            <label *ngIf="showScoreLabel" class="option-label"> You scored {{calculateTotalCorrectAnswers()}} out of {{questions.length}}.</label>
+        </div>
+    </div>
+
 </div>
