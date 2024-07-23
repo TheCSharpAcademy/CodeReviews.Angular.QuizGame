@@ -86,7 +86,16 @@ export class QuizDialogComponent {
 
 
   async postGameResults(game: Game) {
-    this.quizService.addGame(game);
+    this.quizService.addGame(game).subscribe({
+      next: (success) => {
+        console.log('Game added successfully:', success);
+      },
+      error: (err) => {
+        console.error('Error adding game:', err);
+      },
+      complete: () => {
+      }
+    });
   }
 
 

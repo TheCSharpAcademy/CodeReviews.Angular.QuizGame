@@ -71,12 +71,22 @@ namespace QuizGameAPI.Controllers
         // POST: api/Games
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Game>> PostGame(Game game)
+        public async Task<ActionResult<Game>> PostGame(CreateGameDTO createGameDto)
         {
+            var game = new Game
+            {
+                PlayerName = createGameDto.PlayerName,
+                TotalAmountOfQuestions = createGameDto.TotalAmountOfQuestions,
+                CorrectAmountOfAnswers = createGameDto.CorrectAmountOfAnswers,
+                QuizId = createGameDto.QuizId,
+                // Manually set the Quiz property
+                Quiz = await _context.QuizRecords.FindAsync(createGameDto.QuizId)
+            };
+
             _context.GameRecords.Add(game);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGame", new { id = game.Id }, game);
+            return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
         }
 
         // DELETE: api/Games/5
