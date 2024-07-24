@@ -77,9 +77,8 @@ namespace QuizGameAPI.Controllers
             {
                 PlayerName = createGameDto.PlayerName,
                 TotalAmountOfQuestions = createGameDto.TotalAmountOfQuestions,
-                CorrectAmountOfAnswers = createGameDto.CorrectAmountOfAnswers,
+                CorrectAmountOfQuestions = createGameDto.CorrectAmountOfQuestions,
                 QuizId = createGameDto.QuizId,
-                // Manually set the Quiz property
                 Quiz = await _context.QuizRecords.FindAsync(createGameDto.QuizId)
             };
 

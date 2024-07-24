@@ -13,9 +13,9 @@ namespace QuizGameAPI.Data
                 new Quiz { Id = 3, QuizName = "Pokemon" }
             );
             modelBuilder.Entity<Game>().HasData(
-                new Game { Id = 1, QuizId = 1, PlayerName = "Peter", TotalAmountOfQuestions = 10, CorrectAmountOfAnswers = 8 },
-                new Game { Id = 2, QuizId = 2, PlayerName = "Michiel", TotalAmountOfQuestions = 10, CorrectAmountOfAnswers = 6 },
-                new Game { Id = 3, QuizId = 3, PlayerName = "Ash", TotalAmountOfQuestions = 10, CorrectAmountOfAnswers = 10 }
+                new Game { Id = 1, QuizId = 1, PlayerName = "Peter", TotalAmountOfQuestions = 10, CorrectAmountOfQuestions = 8 },
+                new Game { Id = 2, QuizId = 2, PlayerName = "Michiel", TotalAmountOfQuestions = 10, CorrectAmountOfQuestions = 6 },
+                new Game { Id = 3, QuizId = 3, PlayerName = "Ash", TotalAmountOfQuestions = 10, CorrectAmountOfQuestions = 10 }
             );
             modelBuilder.Entity<Question>().HasData(
                 new Question
