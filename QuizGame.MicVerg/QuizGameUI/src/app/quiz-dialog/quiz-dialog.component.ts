@@ -66,8 +66,6 @@ export class QuizDialogComponent {
 
   
   async submitAnswers() {
-    // build game object through selectAnswer?
-    // post game object
     this.isButtonDisabled = true;
     const playerName = this.playerName;
     const quizId = this.questions[0].quizId;

@@ -8,25 +8,22 @@ import { QuizDialogComponent } from '../quiz-dialog/quiz-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { Game } from '../game.model';
+import { ScorehistoryComponent } from '../scorehistory/scorehistory.component';
 
 
 @Component({
   selector: 'app-mainmenu',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, MatIconModule, QuizDialogComponent],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, QuizDialogComponent, ScorehistoryComponent],
   templateUrl: './mainmenu.component.html',
   styleUrl: './mainmenu.component.css'
 })
 export class MainmenuComponent {
 
-  questions: Question[] = [];
   games: Game[] = [];
+  questions: Question[] = [];
 
   constructor(private quizService: QuizServiceService, public dialog: MatDialog){
-  }
-
-  ngOnInit(): void {
-    
   }
 
   async openQuestionsDialog(quizId: number | string) {
@@ -46,15 +43,24 @@ export class MainmenuComponent {
     }
   }
 
-  async getGames() {
+
+  async openScoreHistoryDialog(){
     try {
       const games$ = this.quizService.getGames();
       const games = await firstValueFrom(games$);
+
       console.log(games);
-      this.games = games;
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.height = '75%';
+      dialogConfig.width = '80%';
+      dialogConfig.data = games;
+      dialogConfig.panelClass = 'custom-dialog-container';
+
+      this.dialog.open(ScorehistoryComponent, dialogConfig);
     } catch (error) {
       console.error('Failed to fetch games:', error);
     }
   }
+  
 }
 
