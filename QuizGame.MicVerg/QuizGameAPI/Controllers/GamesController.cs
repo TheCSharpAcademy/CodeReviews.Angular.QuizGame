@@ -73,20 +73,29 @@ namespace QuizGameAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Game>> PostGame(CreateGameDTO createGameDto)
         {
-            var game = new Game
+            try
             {
-                PlayerName = createGameDto.PlayerName,
-                TotalAmountOfQuestions = createGameDto.TotalAmountOfQuestions,
-                CorrectAmountOfQuestions = createGameDto.CorrectAmountOfQuestions,
-                QuizId = createGameDto.QuizId,
-                Quiz = await _context.QuizRecords.FindAsync(createGameDto.QuizId)
-            };
+                var game = new Game
+                {
+                    PlayerName = createGameDto.PlayerName,
+                    TotalAmountOfQuestions = createGameDto.TotalAmountOfQuestions,
+                    CorrectAmountOfQuestions = createGameDto.CorrectAmountOfQuestions,
+                    QuizId = createGameDto.QuizId,
+                    Quiz = await _context.QuizRecords.FindAsync(createGameDto.QuizId)
+                };
 
-            _context.GameRecords.Add(game);
-            await _context.SaveChangesAsync();
+                _context.GameRecords.Add(game);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
+                return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
         }
+
 
         // DELETE: api/Games/5
         [HttpDelete("{id}")]
