@@ -28,6 +28,10 @@ export class QuizServiceService {
     return this.http.get<Game[]>(`${this.apiGamesUrl}`);
   }
 
+  getQuizs(): Observable<Quiz[]>{
+    return this.http.get<Quiz[]>(`${this.apiQuizsUrl}`);
+  }
+
   addGame(game: Game): Observable<Game> {
     return this.http.post<Game>(this.apiGamesUrl, game, this.httpOptions);
   }

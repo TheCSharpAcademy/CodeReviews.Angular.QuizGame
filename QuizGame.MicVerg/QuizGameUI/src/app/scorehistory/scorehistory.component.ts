@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Quiz } from '../quiz.model';
 
 @Component({
   selector: 'app-scorehistory',
@@ -21,6 +22,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrl: './scorehistory.component.css'
 })
 export class ScorehistoryComponent {
+  quizzes: Quiz[] = [];
   dataSource = new MatTableDataSource<Game>();
   displayedColumns: string[] = ['id', 'playerName', 'score', 'quizId']
 
@@ -35,9 +37,20 @@ export class ScorehistoryComponent {
   }
 
   ngOnInit() {
-    this.quizService.getGames().subscribe((data: Game[]) => {
-      this.dataSource.data = data;
-    });
+    this.quizService.getQuizs().subscribe((quizzesData: Quiz[]) => {
+      this.quizzes = quizzesData;
   
-}
+      this.quizService.getGames().subscribe((gamesData: Game[]) => {
+        const gamesWithQuizNames = gamesData.map(game => ({
+          ...game,
+          quizName: this.quizzes.find(quiz => quiz.id === game.quizId)?.quizName || 'Unknown'
+        }));
+  
+        this.dataSource.data = gamesWithQuizNames;
+      });
+    });
+  }
+  
+
+  
 }
