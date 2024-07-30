@@ -1,14 +1,5 @@
 import { Component } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
-import {
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogConfig
-} from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { Question } from '../question.model';
 import { QuizServiceService } from '../quiz-service.service';
@@ -86,10 +77,8 @@ export class QuizDialogComponent {
   async postGameResults(game: Game) {
     this.quizService.addGame(game).subscribe({
       next: (success) => {
-        console.log('Game added successfully:', success);
       },
       error: (err) => {
-        console.error('Error adding game:', err);
       },
       complete: () => {
       }

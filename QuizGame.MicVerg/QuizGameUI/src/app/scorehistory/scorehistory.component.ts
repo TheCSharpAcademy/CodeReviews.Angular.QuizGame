@@ -1,10 +1,8 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import { Game } from '../game.model';
 import { QuizServiceService } from '../quiz-service.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MainmenuComponent } from '../mainmenu/mainmenu.component';
-import { firstValueFrom } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';

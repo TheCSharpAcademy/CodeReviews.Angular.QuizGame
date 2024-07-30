@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
@@ -49,7 +49,6 @@ export class MainmenuComponent {
       const games$ = this.quizService.getGames();
       const games = await firstValueFrom(games$);
 
-      console.log(games);
       const dialogConfig = new MatDialogConfig();
       dialogConfig.height = '75%';
       dialogConfig.width = '80%';
