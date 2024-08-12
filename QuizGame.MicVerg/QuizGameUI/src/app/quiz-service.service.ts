@@ -36,6 +36,10 @@ export class QuizServiceService {
     return this.http.post<Game>(this.apiGamesUrl, game, this.httpOptions);
   }
 
+  addQuiz(quiz: Quiz): Observable<Quiz> {
+    return this.http.post<Quiz>(this.apiQuizsUrl, quiz, this.httpOptions);
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

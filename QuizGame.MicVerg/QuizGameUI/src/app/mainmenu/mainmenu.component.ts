@@ -9,12 +9,13 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { Game } from '../game.model';
 import { ScorehistoryComponent } from '../scorehistory/scorehistory.component';
+import { AddquizdialogComponent } from '../addquizdialog/addquizdialog.component';
 
 
 @Component({
   selector: 'app-mainmenu',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule, MatIconModule, QuizDialogComponent, ScorehistoryComponent],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, QuizDialogComponent, ScorehistoryComponent, AddquizdialogComponent],
   templateUrl: './mainmenu.component.html',
   styleUrl: './mainmenu.component.css'
 })
@@ -58,6 +59,20 @@ export class MainmenuComponent {
       this.dialog.open(ScorehistoryComponent, dialogConfig);
     } catch (error) {
       console.error('Failed to fetch games:', error);
+    }
+  }
+
+  async openAddQuizDialog(){
+    try {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.height = '75%';
+      dialogConfig.width = '80%';
+      //dialogConfig.data = quiz;
+      dialogConfig.panelClass = 'custom-dialog-container';
+
+      this.dialog.open(AddquizdialogComponent, dialogConfig);
+    } catch (error) {
+      console.error('Failed to open dialog:', error);
     }
   }
   
