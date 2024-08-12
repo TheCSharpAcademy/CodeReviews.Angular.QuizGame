@@ -1,1 +1,21 @@
-<p>addquizdialog works!</p>
+<div class="questiondialog">
+    <div class="form-container">
+        <mat-form-field>
+            <mat-label>Quiz name</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+    <div *ngFor="let i of questionsCount" class="question-form-container">
+        <mat-form-field class="wide-mat-form-field">
+          <mat-label>Question {{ i }}</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field class="wide-mat-form-field">
+          <mat-label>Answer {{ i }}</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+    <div class="submitbutton">
+        <button mat-raised-button id="btnSubmitQuiz" color="accent" (click)="submitQuiz()">Submit quiz</button>
+    </div>
+</div>
