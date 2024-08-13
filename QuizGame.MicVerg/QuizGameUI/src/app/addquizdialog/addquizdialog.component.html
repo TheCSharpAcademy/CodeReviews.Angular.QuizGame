@@ -8,7 +8,7 @@
     <div *ngFor="let fieldSet of formFields">
         <mat-form-field style="margin-left:5px; margin-right:5px; width: 30%;">
           <mat-label>{{ fieldSet.question }}</mat-label>
-          <textarea matInput></textarea>
+          <textarea matInput [(ngModel)]="fieldSet.question"></textarea>
         </mat-form-field>
         <mat-form-field style="margin-left:5px; margin-right:5px; width: 16%;">
           <mat-label>Answer 1</mat-label>

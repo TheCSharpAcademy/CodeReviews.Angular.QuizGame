@@ -38,7 +38,17 @@ export class AddquizdialogComponent {
   ]
 
   submitQuiz(){
-    
+    const addQuizPayload = {
+      quizName: this.quizName,
+      questions: this.formFields.map(field => ({
+        quizQuestion: field.question,
+        answer1: field.answer1,
+        answer2: field.answer2,
+        answer3: field.answer3,
+        correctAnswerIndex: field.correctAnswerIndex
+      }))
+    }
+    console.log(addQuizPayload);
   }
   
   onPageChange(event: PageEvent) {
