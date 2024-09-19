@@ -1,0 +1,14 @@
+:host {
+    border: 2px solid #00ffff;
+    border-style: double;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(to bottom, #004c6d, #002528);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  }

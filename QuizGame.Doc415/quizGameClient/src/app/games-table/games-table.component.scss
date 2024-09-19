@@ -1,0 +1,50 @@
+:host{
+    background: #033337;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.danger{
+    color:rgb(117, 4, 4)
+}
+
+.details{
+    color:#00ffff
+}
+
+.score{
+    color:rgb(31, 224, 111)
+}
+
+table {
+   background: transparent;
+}
+
+table td{
+    color:#02dcdd
+
+}
+mat-paginator{
+    background: #002a2e;
+}
+
+h3, .mainMenuButton{
+    color:#00ffff;
+    margin:1rem;
+}
+
+article{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.replay{
+    color:#f7ace7
+}
+
+h5 {
+    margin-top:0.4rem;
+    margin-left: 1rem;
+    color:#00ffff;
+}

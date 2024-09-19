@@ -1,0 +1,11 @@
+:host {
+    display:flex;
+    gap:3rem
+}
+
+:host article{
+    display:flex;
+    flex-direction: column;
+    gap:3rem;
+}
+
