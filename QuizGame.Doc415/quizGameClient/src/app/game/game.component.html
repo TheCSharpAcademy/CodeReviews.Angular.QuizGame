@@ -60,6 +60,8 @@
     {{ quizQuestions()[questionIndex()].all_answers[3] | decodeHTMLEntities }}
   </button>
 </app-answerbox>
+<audio #correct src="correct.mp3"></audio>
+<audio #wrong src="error.mp3"></audio>
 
 } 
 @else {

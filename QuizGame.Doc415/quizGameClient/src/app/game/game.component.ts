@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DecodeHTMLEntitiesPipe } from '../decode-htmlentities.pipe';
 import { GameService } from './game.service';
 import { TrivaDbServiceService } from '../triva-db-service.service';
@@ -32,6 +32,9 @@ export class GameComponent implements OnInit {
     public triviaDbService: TrivaDbServiceService,
     public menuService:MainmenuService
   ) {}
+
+  @ViewChild('correct') correctSound: any;
+  @ViewChild('wrong') wrongSound: any;
 
   get quizQuestions() {
     return this.triviaDbService.questionsInQuiz.asReadonly();
@@ -72,6 +75,7 @@ export class GameComponent implements OnInit {
     }
     this.gameService.selectedAnswer.set(selected);
     this.gameService.isCorrect.set(selected === this.quizQuestions()[this.questionIndex()].correct_answer);
+    this.isCorrect()?this.correctSound.nativeElement.play():this.wrongSound.nativeElement.play();
     this.gameService.isAnswerSelected.set(true);
 
 
