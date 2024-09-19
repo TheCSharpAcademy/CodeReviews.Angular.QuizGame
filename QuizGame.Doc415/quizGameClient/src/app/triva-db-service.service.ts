@@ -2,10 +2,12 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Question } from './question.model';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root',
 })
 export class TrivaDbServiceService {
+  private _snackBar = inject(MatSnackBar);
   private httpClient = inject(HttpClient);
   url = 'https://opentdb.com/api.php?amount=10&type=multiple';
   questionsInQuiz = signal<Question[]>([]);
@@ -25,6 +27,9 @@ export class TrivaDbServiceService {
       this.shuffleAnswers();
       this.isLoaded.set(true);
     } catch {
+      this._snackBar.open('Can not connect to TrivaDB','Dismiss', {
+        duration: 2000,
+      })     
       console.log("error");
     }
   }

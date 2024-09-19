@@ -63,8 +63,7 @@ export class GameComponent implements OnInit {
   async returnMainMenu(){
     await this.triviaDbService.getQuestionsFromTriviaDbAsync();
     this.gameService.games.set([]);
-    this.menuService.inGameState.set(false);
-    this.menuService.inStatsState.set(false);
+    this.menuService.returnMainMenu();
   }
 
   onSelectAnswer(selected: string) {
@@ -106,7 +105,5 @@ export class GameComponent implements OnInit {
     await this.gameService.onGameEnd()
     this.gameService.resetGame();
     await this.gameService.getGames();
-
-    console.log("gameover")
   }
 }

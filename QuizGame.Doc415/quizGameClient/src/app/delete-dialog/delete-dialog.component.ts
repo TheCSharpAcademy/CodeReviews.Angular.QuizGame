@@ -37,8 +37,7 @@ export class DeleteDialogComponent {
   async onConfirm() {
     await this.gameService.deleteGame(this.gameId)
     await this.gameService.getGames(1,this.pageSize)
-    this.menuService.inGameState.set(false);
-    this.menuService.inStatsState.set(true)
+    this.menuService.startStats();
 
   }
 }

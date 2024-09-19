@@ -6,11 +6,13 @@ import { type Question } from '../question.model';
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameService {
+  private _snackBar = inject(MatSnackBar);
   private httpClient = inject(HttpClient);
   url = 'https://localhost:7002/api/games';
   wrongAnsweredQuestions: Question[] = [];
@@ -45,10 +47,16 @@ export class GameService {
         wrongAnsweredQuestions: this.wrongAnsweredQuestions,
       });
       const response = await lastValueFrom(query);
+      this._snackBar.open(`Saved`, 'Dismiss', {
+        duration: 2000,
+      });
       console.log(response);
       this.resetGame();
     } catch (error) {
       console.log(error);
+      this._snackBar.open(`Save failed!`, 'Dismiss', {
+        duration: 2000,
+      });
     }
   }
 
@@ -60,14 +68,13 @@ export class GameService {
         `${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`
       );
       var resData = await lastValueFrom(query);
-      console.log(resData.games)
-      console.log(this.games())
-
       this.games.set(resData.games)
-      console.log(this.games())
       this.totalRecords.set(resData.totalRecords)
       this.trivaDbService.isLoaded.set(true)
     } catch (error) {
+      this._snackBar.open(`Failed to load data`, 'Dismiss', {
+        duration: 2000,
+      });
       console.log(error);
     }
   }
@@ -76,7 +83,9 @@ export class GameService {
     try{
       const query = this.httpClient.delete(`${this.url}/${id}`);
       var response=await lastValueFrom(query);
-      console.log("deleted")
+      this._snackBar.open(`Game deleted`, 'Dismiss', {
+        duration: 2000,
+      });
     }
     catch (error) {
       console.log(error);

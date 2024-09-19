@@ -14,10 +14,10 @@ export class MainMenuComponent {
 
   
   startGameState(){
-    this.menuService.inGameState.set(true)
+    this.menuService.startGame();
   }
 
   startStatsState(){
-    this.menuService.inStatsState.set(true)
+    this.menuService.startStats();
     }
 }

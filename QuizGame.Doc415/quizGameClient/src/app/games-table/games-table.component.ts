@@ -9,8 +9,8 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { Question } from '../question.model';
 import { GameDetailsDialogComponent } from '../game-details-dialog/game-details-dialog.component';
 import { TrivaDbServiceService } from '../triva-db-service.service';
-import { Quiz } from '../quiz.model';
 import { MainmenuService } from '../main-menu/mainmenu.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-games-table',
   standalone: true,
@@ -19,6 +19,7 @@ import { MainmenuService } from '../main-menu/mainmenu.service';
   styleUrl: './games-table.component.scss',
 })
 export class GamesTableComponent implements OnInit {
+  private _snackBar = inject(MatSnackBar);
   constructor(
     public gameService: GameService,
     public trivaDbService:TrivaDbServiceService,
@@ -51,13 +52,14 @@ export class GamesTableComponent implements OnInit {
     this.trivaDbService.shuffleAnswers();
     this.gameService.resetGame();
     this.gameService.isGameOver.set(false);
-    this.menuService.inStatsState.set(false);
-    this.menuService.inGameState.set(true);
-  }
+    this._snackBar.open(`Replaying recorded game`, 'Dismiss', {
+      duration: 2000,
+    });
+    this.menuService.startGame()
+      }
 
    returnMainMenu(){
-    this.menuService.inGameState.set(false);
-    this.menuService.inStatsState.set(false);
+    this.menuService.returnMainMenu();
   }
   openDeleteDialog(
     enterAnimationDuration: string,
