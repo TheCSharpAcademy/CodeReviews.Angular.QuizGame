@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("No default conntection string");
-builder.Services.AddDbContext<QuizContext>(option => option.UseSqlServer(connectionString));
+builder.Services.AddDbContextFactory<QuizContext>(option => option.UseSqlServer(connectionString));
 builder.Services.AddScoped<GameService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

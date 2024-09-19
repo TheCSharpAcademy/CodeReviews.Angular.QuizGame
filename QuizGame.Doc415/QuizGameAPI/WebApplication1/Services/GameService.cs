@@ -7,11 +7,11 @@ namespace WebApplication1.Services;
 
 public class GameService
 {
-    private QuizContext _quizContext;
+    private readonly IDbContextFactory<QuizContext> _contextFactory;
 
-    public GameService(QuizContext quizContext)
+    public GameService(IDbContextFactory<QuizContext> contextFactory)
     {
-        _quizContext = quizContext;
+        _contextFactory = contextFactory;
     }
 
     public async Task CreateGame(GameDTO gameDTO)
@@ -34,10 +34,12 @@ public class GameService
         newGame.WrongAnsweredQuestions = wrongAnsweredQuestions;
         try
         {
-            await _quizContext.Questions.AddRangeAsync(askedQuestions);
-            await _quizContext.Quizes.AddAsync(newQuiz);
-            await _quizContext.Games.AddAsync(newGame);
-            _quizContext.SaveChanges();
+            using var context = _contextFactory.CreateDbContext();
+            await context.Questions.AddRangeAsync(askedQuestions);
+            await context.Quizes.AddAsync(newQuiz);
+            await context.Games.AddAsync(newGame);
+            await context.SaveChangesAsync();
+
         }
         catch (Exception ex)
         {
@@ -47,11 +49,12 @@ public class GameService
 
     public async Task<GamesViewModel> GetGames(int pageIndex, int pageSize)
     {
-        var query = _quizContext.Games
-         .Include(g => g.WrongAnsweredQuestions)
-         .Include(g => g.Quiz)
-         .ThenInclude(q => q.Questions)
-         .AsQueryable();
+        using var context = _contextFactory.CreateDbContext();
+        var query = context.Games
+     .Include(g => g.WrongAnsweredQuestions)
+     .Include(g => g.Quiz)
+     .ThenInclude(q => q.Questions)
+     .AsQueryable();
 
         var skip = (pageIndex - 1) * pageSize;
         query = query.Skip(skip).Take(pageSize);
@@ -64,15 +67,17 @@ public class GameService
             Games = gamesToSend,
             TotalRecords = records
         };
-
         return result;
-
     }
 
     public async Task DeleteGame(string id)
     {
-        var quiz = _quizContext.Quizes.Find(id);
-        _quizContext.Quizes.Remove(quiz);
-        _quizContext.SaveChanges();
+        using var context = _contextFactory.CreateDbContext();
+        var quiz =await  context.Quizes.FindAsync(id);
+        if (quiz is not null)
+        {
+            context.Quizes.Remove(quiz);
+            await context.SaveChangesAsync();
+        }
     }
 }
