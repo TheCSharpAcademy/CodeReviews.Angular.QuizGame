@@ -1,0 +1,72 @@
+<div class="context">
+    <div>
+        <button mat-raised-button color="primary" (click)="openScoreHistoryDialog()" style="margin-left: 20px; margin-top: 20px;"><mat-icon>score</mat-icon>Scores history</button>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" (click)="openAddQuizDialog()" style="margin-left: 20px; margin-top: 20px;"><mat-icon>add</mat-icon>Add quiz</button>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <h1>Pick your subject</h1>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 100px; margin-left: 50px; margin-right: 50px;">
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title class="mat-card-title">History</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="..\assets\img\antique-7627999_640.jpg" alt="History">
+            <mat-card-content class="mat-card-content">
+                <p>
+                  10 general questions about world history.
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="accent" (click)="openQuestionsDialog(1)">Let's go!</button>
+            </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title>.NET core</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="..\assets\img\coding-926242_640.jpg" alt=".NET">
+            <mat-card-content class="mat-card-content">
+                <p>
+                  10 questions about .NET core.
+                </p>
+            </mat-card-content>
+            <mat-card-actions class="mat-card-actions">
+                <button mat-raised-button color="accent" (click)="openQuestionsDialog(2)">Let's go!</button>
+            </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title>Pokemon</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="..\assets\img\bulbasaur-6380446_640.jpg" alt="Pokemon">
+            <mat-card-content class="mat-card-content">
+                <p>
+                  10 questions about gen 1 and 2 pokemon.
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="accent" (click)="openQuestionsDialog(3)">Let's go!</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+<div class="area" >
+        <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ul>
+</div >

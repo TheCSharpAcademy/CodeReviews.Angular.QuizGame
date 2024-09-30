@@ -1,0 +1,35 @@
+<div class="questiondialog">
+    <div class="form-container">
+        <mat-form-field>
+            <mat-label>Quiz Name</mat-label>
+            <input matInput [(ngModel)]="quizName">
+        </mat-form-field>
+    </div>
+    <div *ngFor="let fieldSet of formFields">
+        <mat-form-field style="margin-left:5px; margin-right:5px; width: 30%;">
+          <mat-label>{{ fieldSet.question }}</mat-label>
+          <textarea matInput [(ngModel)]="fieldSet.question"></textarea>
+        </mat-form-field>
+        <mat-form-field style="margin-left:5px; margin-right:5px; width: 16%;">
+          <mat-label>Answer 1</mat-label>
+          <input matInput [(ngModel)]="fieldSet.answer1">
+        </mat-form-field>
+        <mat-form-field style="margin-left:5px; margin-right:5px; width: 16%;">
+          <mat-label>Answer 2</mat-label>
+          <input matInput [(ngModel)]="fieldSet.answer2">
+        </mat-form-field>
+        <mat-form-field style="margin-left:5px; margin-right:5px; width: 16%;">
+          <mat-label>Answer 3</mat-label>
+          <input matInput [(ngModel)]="fieldSet.answer3">
+        </mat-form-field>
+        <mat-form-field style="margin-left:5px; margin-right:5px; width: 16%;">
+          <mat-label>Correct Answer Index</mat-label>
+          <input matInput [(ngModel)]="fieldSet.correctAnswerIndex">
+        </mat-form-field>
+    </div>
+
+    <div class="submitbutton">
+        <button mat-raised-button id="btnSubmitQuiz" color="accent" (click)="submitQuiz()">Submit quiz</button>
+    </div>
+    
+</div>
