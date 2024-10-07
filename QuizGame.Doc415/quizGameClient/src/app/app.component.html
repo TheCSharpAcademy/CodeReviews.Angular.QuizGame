@@ -1,0 +1,11 @@
+<app-header/>
+@if (!isGameState && !isStatsState) {
+    <app-main-menu/>
+}
+@else {
+@if(isGameState && !isStatsState){
+    <app-game/>
+}
+@else{<app-games-table/>}
+}
+    

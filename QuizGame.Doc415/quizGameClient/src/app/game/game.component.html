@@ -1,0 +1,80 @@
+@if( !isGameOver()){
+@if(isLoaded){ 
+<h5>{{ quizQuestions()[questionIndex()].question | decodeHTMLEntities }}</h5>
+<app-answerbox>
+  <button
+    mat-stroked-button
+    ngProjectAs="answer1"
+    [disabled]="isAnswerSelected()"
+    (click)="onSelectAnswer(quizQuestions()[questionIndex()].all_answers[0])"
+    [ngClass]="{
+      correct:
+        selectedAnswer() === quizQuestions()[questionIndex()].all_answers[0] &&
+        isCorrect(),
+      incorrect:
+        selectedAnswer() === quizQuestions()[questionIndex()].all_answers[0] &&
+        !isCorrect()
+    }"
+  >
+    {{ quizQuestions()[questionIndex()].all_answers[0] | decodeHTMLEntities }}
+  </button>
+  <button
+    mat-stroked-button
+    ngProjectAs="answer2"
+    [disabled]="isAnswerSelected()"
+    (click)="onSelectAnswer(quizQuestions()[questionIndex()].all_answers[1])"
+    [ngClass]="{
+      correct:
+        selectedAnswer() === quizQuestions()[questionIndex()].all_answers[1] &&
+        isCorrect(),
+      incorrect:
+        selectedAnswer() === quizQuestions()[questionIndex()].all_answers[1] &&
+        !isCorrect()
+    }"
+  >
+    {{ quizQuestions()[questionIndex()].all_answers[1] | decodeHTMLEntities }}
+  </button>
+  
+  <button
+    mat-stroked-button
+    ngProjectAs="answer3"
+    [disabled]="isAnswerSelected()"
+    (click)="onSelectAnswer(quizQuestions()[questionIndex()].all_answers[2])"
+    [ngClass]="{
+        correct: selectedAnswer() === quizQuestions()[questionIndex()].all_answers[2] && isCorrect(),
+        incorrect: selectedAnswer() === quizQuestions()[questionIndex()].all_answers[2] && !isCorrect()
+      }"
+  >
+    {{ quizQuestions()[questionIndex()].all_answers[2] | decodeHTMLEntities }}
+  </button>
+  <button
+    mat-stroked-button
+    ngProjectAs="answer4"
+    [disabled]="isAnswerSelected()"
+    (click)="onSelectAnswer(quizQuestions()[questionIndex()].all_answers[3])"
+    [ngClass]="{
+        correct: selectedAnswer() === quizQuestions()[questionIndex()].all_answers[3] && isCorrect(),
+        incorrect: selectedAnswer() === quizQuestions()[questionIndex()].all_answers[3] && !isCorrect()
+      }"
+  >
+    {{ quizQuestions()[questionIndex()].all_answers[3] | decodeHTMLEntities }}
+  </button>
+</app-answerbox>
+<audio #correct src="correct.mp3"></audio>
+<audio #wrong src="error.mp3"></audio>
+
+} 
+@else {
+  <h3 class="loadingHeading">Loading</h3>
+  <mat-progress-bar mode="query"></mat-progress-bar>
+  <p class="loadingHeading">Tip: Trivia DB allows requests once per 5 seconds...</p>
+
+}
+}
+@else {
+  <article>
+    <h1 id="gameOverHeading">Game Over!</h1>
+    <button mat-stroked-button (click)="startNewGame()">Start new game!</button>
+    <button mat-stroked-button (click)="returnMainMenu()">Return to main menu</button>
+  </article> 
+}

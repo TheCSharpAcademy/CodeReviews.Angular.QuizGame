@@ -1,0 +1,65 @@
+:host {
+  border: 2px solid #00ffff;
+  border-style: double;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 50rem;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(to bottom, #004c6d, #002528);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+:host article button {
+    width:30rem;
+}
+:host article {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+:host h5, .loadingHeading {
+  color: #00ffff;
+}
+
+.correct {
+    background-color: #4caf50 !important;  
+  }
+  
+  .incorrect {
+    background-color: #f44336 !important;  
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+   
+ #gameOverHeading {
+    animation: pulse 1s infinite;
+    margin: 0 0 0.5rem 0;
+    font-size: 3rem;
+    color:#00ffff
+  }
+
+  article{
+    padding:1rem;
+    display:flex;
+    flex-direction: column;
+    gap:1.5rem
+  }
