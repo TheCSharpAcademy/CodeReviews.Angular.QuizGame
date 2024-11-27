@@ -1,0 +1,149 @@
+<h2 mat-dialog-title *ngIf="!isUpdate">Add Quiz</h2>
+<h2 mat-dialog-title *ngIf="isUpdate">Edit Quiz</h2>
+
+<mat-dialog-content>
+  <mat-stepper linear #stepper>
+    <!-- Quiz -->
+    <mat-step [stepControl]="quizForm">
+      <form [formGroup]="quizForm" class="form-container">
+        <ng-template matStepLabel>Quiz</ng-template>
+        <mat-form-field appearance="outline" class="mt">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" required />
+          <mat-error *ngIf="quizForm.get('name')?.hasError('required')">
+            Name is required.
+          </mat-error>
+          <mat-icon matPrefix>abc</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            type="text"
+            formControlName="description"
+          ></textarea>
+          <mat-icon matPrefix>description</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Image URL</mat-label>
+          <input matInput type="text" formControlName="imageUrl" />
+          <mat-icon matPrefix>image</mat-icon>
+        </mat-form-field>
+        <div class="buttons-container">
+          <button
+            mat-stroked-button
+            mat-dialog-close
+            color="accent"
+            cdkFocusInitial
+          >
+            Cancel
+          </button>
+          <button mat-stroked-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- Questions -->
+    <mat-step [stepControl]="questionsForm" label="Questions">
+      <form [formGroup]="questionsForm">
+        <div formArrayName="questions">
+          <ng-template matStepLabel>Questions</ng-template>
+          <mat-accordion>
+            <mat-expansion-panel
+              *ngFor="let question of questions.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> Question {{ i + 1 }} </mat-panel-title>
+                <mat-panel-description class="question-button">
+                  <button
+                    mat-icon-button
+                    class="my"
+                    aria-label="Delete question"
+                    (click)="onDeleteQuestion(i)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field appearance="outline">
+                <mat-label>Question Text</mat-label>
+                <textarea
+                  matInput
+                  type="text"
+                  formControlName="text"
+                  required
+                ></textarea>
+                <mat-icon matPrefix>question_mark</mat-icon>
+              </mat-form-field>
+              <div formArrayName="answers">
+                <div
+                  *ngFor="let answer of onGetAnswers(i).controls; let j = index"
+                  [formGroupName]="j"
+                  class="answer-container"
+                >
+                  <mat-form-field appearance="outline" class="answer-input">
+                    <mat-label>Answer {{ j + 1 }}</mat-label>
+                    <input matInput formControlName="text" required />
+                    <mat-icon matPrefix>abc</mat-icon>
+                  </mat-form-field>
+                  <mat-checkbox
+                    class="my"
+                    formControlName="isCorrect"
+                  ></mat-checkbox>
+                </div>
+              </div>
+              <div *ngIf="question.invalid && question.touched">
+                <mat-error
+                  *ngIf="onGetAnswers(i).hasError('invalidCorrectAnswers')"
+                  >Exactly one correct answer is required.</mat-error
+                >
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <div class="buttons-container mt">
+          <button
+            mat-stroked-button
+            mat-dialog-close
+            color="accent"
+            cdkFocusInitial
+          >
+            Cancel
+          </button>
+          <button mat-stroked-button matStepperPrevious>Back</button>
+          <button mat-stroked-button (click)="onAddQuestion()">
+            Add Question
+          </button>
+          <button mat-stroked-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- Publish -->
+    <mat-step>
+      <ng-template matStepLabel>Publish</ng-template>
+      <p>Click publish to save your changes.</p>
+      <div class="buttons-container">
+        <mat-spinner
+          *ngIf="isInProgress"
+          [diameter]="40"
+          mode="indeterminate"
+        ></mat-spinner>
+        <button
+          *ngIf="!isInProgress"
+          mat-stroked-button
+          mat-dialog-close
+          color="accent"
+          cdkFocusInitial
+        >
+          Cancel
+        </button>
+        <button *ngIf="!isInProgress" mat-stroked-button matStepperPrevious>
+          Back
+        </button>
+        <button *ngIf="!isInProgress" mat-stroked-button (click)="onPublish()">
+          Publish
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>

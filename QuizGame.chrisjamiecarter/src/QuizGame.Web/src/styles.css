@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  z-index: -1;
+}
+
+.content {
+  flex-grow: 1;
+  margin: 0 auto;
+  padding: 2.5rem;
+  width: 90%;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.buttons-container-left {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mt {
+  margin-top: 1rem;
+}
+
+.my {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-image {
+  padding: 0.5rem;
+  max-height: 3rem;
+  max-width: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
